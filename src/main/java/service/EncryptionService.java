@@ -24,6 +24,12 @@ public class EncryptionService {
         }
     }
 
+    private EncryptionService() {}
+
+    public static EncryptionService getInstance() {
+        return encryptionServiceinstance;
+    }
+
     public String encrypt(String str) {
         try {
             ecipher.init(Cipher.ENCRYPT_MODE, key);
@@ -38,12 +44,6 @@ public class EncryptionService {
             e.printStackTrace();
         }
         return null;
-    }
-
-    private EncryptionService() {}
-
-    public static EncryptionService getInstance() {
-        return encryptionServiceinstance;
     }
 
     public String decrypt(String str) {
