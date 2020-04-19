@@ -1,7 +1,7 @@
 package service;
 
-import exceptions.ExistingUserException;
 import model.User;
+import exceptions.ExistingUserException;
 
 public class AuthenticationService {
     private static final AuthenticationService authenticationServiceinstance = new AuthenticationService();
