@@ -1,5 +1,7 @@
 package service;
 
+import exceptions.EmailNotFoundException;
+import exceptions.WrongPasswordException;
 import model.User;
 import exceptions.ExistingUserException;
 
@@ -24,5 +26,17 @@ public class AuthenticationService {
             throw new ExistingUserException("User already registered!");
 
         userService.addUser(user);
+    }
+
+    public void login (String email, String password) throws EmailNotFoundException, WrongPasswordException {
+        User existingUser = userService.getUserByEmail(email);
+
+        if(existingUser == null)
+            throw new EmailNotFoundException("User is not registered!");
+
+        String decryptedPassword = encryptionService.decrypt(existingUser.getPassword());
+        if (!decryptedPassword.equals(password))
+            throw new WrongPasswordException("The password for this user is wrong!");
+
     }
 }
