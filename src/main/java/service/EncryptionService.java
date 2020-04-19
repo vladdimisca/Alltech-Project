@@ -49,6 +49,7 @@ public class EncryptionService {
     public String decrypt(String str) {
         try {
             dcipher.init(Cipher.DECRYPT_MODE, key);
+
             byte[] dec = BASE64DecoderStream.decode(str.getBytes());
             byte[] utf8 = dcipher.doFinal(dec);
 
