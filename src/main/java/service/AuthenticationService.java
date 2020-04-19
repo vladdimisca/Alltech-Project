@@ -6,14 +6,14 @@ import model.User;
 import exceptions.ExistingUserException;
 
 public class AuthenticationService {
-    private static final AuthenticationService authenticationServiceinstance = new AuthenticationService();
+    private static final AuthenticationService authenticationServiceInstance = new AuthenticationService();
     EncryptionService encryptionService = EncryptionService.getInstance();
     UserService userService = UserService.getInstance();
 
     private AuthenticationService() {}
 
     public static AuthenticationService getInstance() {
-        return authenticationServiceinstance;
+        return authenticationServiceInstance;
     }
 
     public void register(User user) throws ExistingUserException {
