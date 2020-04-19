@@ -1,8 +1,12 @@
-import exceptions.ExistingUserException;
+import exceptions.EmailNotFoundException;
+import exceptions.WrongPasswordException;
 import model.User;
 import org.junit.jupiter.api.*;
 import service.AuthenticationService;
 import service.UserService;
+import service.LoginService;
+
+import exceptions.ExistingUserException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -10,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class AuthenticationServiceTest {
     AuthenticationService authenticationService = AuthenticationService.getInstance();
+    LoginService loginService = LoginService.getInstance();
     UserService userService = UserService.getInstance();
 
     String randomEmail = "dummy@mail.ro";
@@ -45,6 +50,20 @@ class AuthenticationServiceTest {
 
     @Test
     @Order(3)
+    void loginTest() {
+        boolean result = true;
+        try {
+            String randomPassword = dummyUser.getPassword();
+            loginService.login(randomEmail, randomPassword);
+        } catch (EmailNotFoundException | WrongPasswordException e) {
+            result = false;
+        }
+
+        assertTrue(result, "Checking if email or password is correct");
+    }
+
+    @Test
+    @Order(4)
     void removeUserTest() {
         userService.removeUserByEmail(randomEmail);
 
