@@ -4,30 +4,34 @@ import exceptions.ExistingUserException;
 import model.User;
 import service.AuthenticationService;
 
-import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
+@WebServlet("/guest_profile")
 public class RegisterRequest extends HttpServlet {
+    AuthenticationService authenticationService = AuthenticationService.getInstance();
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String firstName = req.getParameter("firstName");
-        String lastName = req.getParameter("lastName");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String firstName = req.getParameter("first-name");
+        String lastName = req.getParameter("last-name");
         String email = req.getParameter("email");
-        String password = req.getParameter("password");
+        String password = req.getParameter("psw");
 
         User user = new User(firstName, lastName, email, password);
 
-        String message = null;
+        final String message = "You have been registered successfully!";
+
         try {
-            AuthenticationService.getInstance().register(user);
-            resp.getWriter().write(message);
+            authenticationService.register(user);
+            resp.sendRedirect("sign_in.jsp?message=" + URLEncoder.encode(message, StandardCharsets.UTF_8));
         } catch (ExistingUserException e) {
-            resp.getWriter().write(e.getMessage());
+            resp.sendRedirect("guest_profile.jsp?message=" + URLEncoder.encode(e.getMessage(), StandardCharsets.UTF_8));
             e.printStackTrace();
         }
-
     }
 }

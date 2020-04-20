@@ -3,6 +3,8 @@ package service;
 import model.User;
 import repository.UserRepository;
 
+import java.sql.SQLOutput;
+
 public class UserService {
     private static final UserService userServiceInstance = new UserService();
     UserRepository userRepository = UserRepository.getInstance();
