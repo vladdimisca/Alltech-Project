@@ -37,18 +37,10 @@
             </div>
         </nav>
 
-<<<<<<< Updated upstream
         <form name="registerForm" method="post" action="guest_profile">
-            <div class="container">
-                <h1 class="center">Create an account</h1>
-                <hr>
-=======
-    <form name="loginForm" method="post" action="registerServlet">
         <div class="container">
             <h1 class="center">Create an account</h1>
             <hr>
->>>>>>> Stashed changes
-
                 <label for="first-name" class="required"><b>First Name</b></label>
                 <input pattern="[a-zA-Z]+" type="text" placeholder="Enter First Name" name="first-name" id="first-name" required title="Required with alphabets only">
 
