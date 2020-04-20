@@ -52,7 +52,13 @@ class AuthenticationServiceTest {
     void loginTest() {
         boolean result = true;
         try {
+<<<<<<< Updated upstream
             authenticationService.login(randomEmail, randomPassword);
+=======
+            String randomPassword = dummyUser.getPassword();
+            System.out.println(randomPassword);
+            loginService.login(randomEmail, randomPassword);
+>>>>>>> Stashed changes
         } catch (EmailNotFoundException | WrongPasswordException e) {
             result = false;
         }
