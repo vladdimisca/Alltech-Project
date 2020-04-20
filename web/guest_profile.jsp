@@ -42,19 +42,19 @@
             <h1 class="center">Create an account</h1>
             <hr>
                 <label for="first-name" class="required"><b>First Name</b></label>
-                <input pattern="[a-zA-Z]+" type="text" placeholder="Enter First Name" name="first-name" id="first-name" required title="Required with alphabets only">
+                <input pattern="[a-zA-Z]+" type="text" placeholder="Enter First Name" name="first-name" id="first-name" required title="Alphabets only">
 
                 <label for="last-name" class="required"><b>Last Name</b></label>
-                <input pattern="[a-zA-Z]+" type="text" placeholder="Enter Last Name" name="last-name" id="last-name" required title="Required with alphabets only">
+                <input pattern="[a-zA-Z]+" type="text" placeholder="Enter Last Name" name="last-name" id="last-name" required title="Alphabets only">
 
                 <label for="email" class="required"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email" id="email" required>
+                <input pattern="^(?=[A-Z0-9][A-Z0-9@._%+-]{5,253}+$)[A-Z0-9._%+-]{1,64}+@(?:(?=[A-Z0-9-]{1,63}+\.)[A-Z0-9]++(?:-[A-Z0-9]++)*+\.){1,8}+[A-Z]{2,63}+$" type="text" placeholder="Enter Email" name="email" id="email" required title="Email pattern needed">
 
                 <label for="psw" class="required"><b>Password</b></label>
                 <input pattern=".{5,12}" type="password" placeholder="Enter Password" name="psw" id="psw" required title="Length has to be from 5 to 12 characters">
 
-                <c:if test="${not empty requestScope.message}">
-                    <h4>${requestScope.message}</h4>
+                <c:if test="${not empty param.message}">
+                    <h4>${param.message}</h4>
                 </c:if>
 
                 <hr>
