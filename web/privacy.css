@@ -1,0 +1,98 @@
+body{
+    padding-top: 3%;
+    background-color: #F0F0F0;
+
+}
+
+.container {
+    width: 70vw;
+    padding-top: 1%;
+    margin: 2% auto;
+    padding-bottom: 1%;
+    background-color: white;
+    border-radius: 15px;
+    padding: 2%;
+    text-align: justify;
+}
+
+.dropdown-menu {
+    margin-top: 7px;
+    padding: 0;
+
+}
+
+.dropdown-item {
+    color: white;
+}
+
+
+.center{
+    text-align: center;
+}
+
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+
+@media screen and (max-width: 1300px){
+    .container {
+        margin-top: 4%;
+        width: 60vw;
+
+    }
+    h1 {
+        font-size: 6vw;
+    }
+}
+
+@media screen and (max-width: 900px){
+    .container {
+        margin-top: 8%;
+        width: 80vw;
+    }
+    h1 {
+        font-size: 6vw;
+    }
+}
+
+@media screen and (max-width: 700px){
+    .container {
+        margin-top: 10%;
+    }
+    h1 {
+        font-size: 8vw;
+    }
+    h5, h4 {
+        font-size: 6vw;
+    }
+}
+
+@media screen and (max-width: 550px){
+    .container {
+        margin-top: 12%;
+    }
+    h1 {
+        font-size: 8vw;
+    }
+    h5, h4 {
+        font-size: 6vw;
+    }
+}
+
+@media screen and (max-width: 450px){
+    .container {
+        margin-top: 15%;
+    }
+    h1 {
+        font-size: 8vw;
+    }
+    h5, h4 {
+        font-size: 5vw;
+    }
+}
+
+
+
