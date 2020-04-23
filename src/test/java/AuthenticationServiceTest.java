@@ -51,6 +51,7 @@ class AuthenticationServiceTest {
     @Order(3)
     void loginTest() {
         boolean result = true;
+
         try {
             authenticationService.login(randomEmail, randomPassword);
         } catch (EmailNotFoundException | WrongPasswordException e) {

@@ -32,11 +32,10 @@ public class AuthenticationService {
         User existingUser = userService.getUserByEmail(email);
 
         if(existingUser == null)
-            throw new EmailNotFoundException("User is not registered!");
+            throw new EmailNotFoundException("This user is not registered!");
 
         String decryptedPassword = encryptionService.decrypt(existingUser.getPassword());
         if (!decryptedPassword.equals(password))
             throw new WrongPasswordException("The password for this user is wrong!");
-
     }
 }
