@@ -28,9 +28,9 @@ public class RegisterRequest extends HttpServlet {
 
         try {
             AuthenticationService.getInstance().register(user);
-            json.put("message", message);
+            json.put("success", message);
         } catch (ExistingUserException e) {
-            json.put("message", e.getMessage());
+            json.put("failure", e.getMessage());
             e.printStackTrace();
         }
 

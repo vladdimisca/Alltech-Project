@@ -30,7 +30,7 @@ window.onload = function () {
 
                         image.src = item.source;
                         image.alt = "Not available";
-                        image.setAttribute('width', '85%');
+                        image.setAttribute('width', '50%');
 
                         container.appendChild(image);
                         container.appendChild(document.createTextNode(item.number));

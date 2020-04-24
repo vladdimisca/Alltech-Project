@@ -25,12 +25,12 @@ public class LoginRequest extends HttpServlet {
 
         try {
             authenticationService.login(email, password);
-            json.put("message", "success");
+            json.put("success", "success");
         } catch (EmailNotFoundException | WrongPasswordException e) {
-            json.put("message", e.getMessage());
+            json.put("failure", e.getMessage());
             e.printStackTrace();
         }
-
+        System.out.println(json.toString());
         resp.getWriter().write(String.valueOf(json));
     }
 }

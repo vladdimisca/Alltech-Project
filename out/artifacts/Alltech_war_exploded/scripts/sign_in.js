@@ -11,12 +11,11 @@ window.onload = function () {
         xHttpLogin.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 const response = JSON.parse(this.response);
-                let message = "success";
 
-                if(response.message === message) {
+                if(response.hasOwnProperty('success')) {
                     window.location.replace('user_profile.jsp?email=' + email.value);
                 } else {
-                    window.location.replace('sign_in.jsp?message=' + response.message);
+                    window.location.replace('sign_in.jsp?message=' + response.failure);
                 }
             }
         };

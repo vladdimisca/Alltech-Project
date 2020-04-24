@@ -28,9 +28,9 @@ public class RemoveRequest extends HttpServlet {
             AuthenticationService.getInstance().login(email, password);
             userService.removeUserByEmail(email);
 
-            json.put("message", "removed");
+            json.put("success", "success");
         } catch (EmailNotFoundException | WrongPasswordException e) {
-            json.put("message", e.getMessage());
+            json.put("failure", e.getMessage());
             e.printStackTrace();
         }
 

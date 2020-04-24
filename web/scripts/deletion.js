@@ -24,17 +24,17 @@ window.onload = function () {
                     if (this.readyState === 4 && this.status === 200) {
                         const response = JSON.parse(this.response);
 
-                        if (response.message === 'removed') {
+                        if (response.hasOwnProperty('success')) {
                             removeAccount();
                         } else {
                             if (!document.getElementById('message')) {
                                 let message = document.createElement('h4');
                                 message.setAttribute('id', 'message');
-                                message.innerHTML = response.message;
+                                message.innerHTML = response.failure;
 
                                 password.parentNode.insertBefore(message, password.nextSibling);
                             } else {
-                                document.getElementById('message').innerText = response.message;
+                                document.getElementById('message').innerText = response.failure;
                             }
                         }
                     }

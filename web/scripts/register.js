@@ -13,15 +13,14 @@ window.onload = function () {
         xHttpRegister.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 const response = JSON.parse(this.response);
-                let message = "You have been successfully registered!";
 
-                if(response.message === message) {
-                    window.location.replace('sign_in.jsp?message=' + message);
+                if(response.hasOwnProperty('success')) {
+                    window.location.replace('sign_in.jsp?message=' + response.success);
                 } else {
-                    if (!document.getElementById('message')) {
+                    if (response.hasOwnProperty('failure') && !document.getElementById('message')) {
                         let message = document.createElement('h4');
                         message.setAttribute('id', 'message');
-                        message.innerHTML = response.message;
+                        message.innerHTML = response.failure;
 
                         password.parentNode.insertBefore(message, password.nextSibling);
                     }
