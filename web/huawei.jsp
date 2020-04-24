@@ -263,6 +263,7 @@
             <td>Flash</td>
             <td>Yes</td>
         </tr>
+    </table>
         <br>
         <table class="specifications">
             <tr>

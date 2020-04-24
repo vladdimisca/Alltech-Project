@@ -46,51 +46,51 @@
 
     <div class="archive">
         <div class="grow">
-            <a href="dell.jsp">
-                <article class="article">
+            <article class="article">
+                <a href="dell.jsp">
                     <img  src="dell.jpg" alt="Dell Laptop" >
                     <hr>
                     <p class="par">Dell Inspiron 15 3584 Laptop with Intel® Core ™ i3-7020U 2.30 GHz processor</p>
                     <hr>
                     <p class="price"> $370</p>
                     <hr>
-            </a>
-            <button class="cart" >
-                Add to Cart
-                <i class="fa fa-shopping-cart" style="color: white;"></i>
-            </button>
+                </a>
+                <button class="cart" >
+                    Add to Cart
+                    <i class="fa fa-shopping-cart" style="color: white;"></i>
+                </button>
             </article>
         </div>
         <div class="grow">
-            <a href="asus.jsp">
-                <article class="article">
+            <article class="article">
+                <a href="asus.jsp">
                     <img  src="asus.jpg" alt="Asus laptop" >
                     <hr>
                     <p class="par">ASUS VivoBook S14 S431FA Ultraportable Laptop with Intel® Core ™ i5-8265U </p>
                     <hr>
                     <p class="price"> $650</p>
                     <hr>
-            </a>
-            <button class="cart" >
-                Add to Cart
-                <i class="fa fa-shopping-cart" style="color: white;"></i>
-            </button>
+                </a>
+                <button class="cart" >
+                    Add to Cart
+                    <i class="fa fa-shopping-cart" style="color: white;"></i>
+                </button>
             </article>
         </div>
         <div class="grow">
-            <a href="lenovo.jsp">
-                <article class="article">
+            <article class="article">
+                <a href="lenovo.jsp">
                     <img  src="lenovo.jpg" alt="Lenovo laptop" >
                     <hr>
                     <p class="par">Lenovo Legion Y740-15IRHg gaming laptop with Intel Core i7-9750H processor</p>
                     <hr>
                     <p class="price"> $1499</p>
                     <hr>
-            </a>
-            <button class="cart" >
-                Add to Cart
-                <i class="fa fa-shopping-cart" style="color: white;"></i>
-            </button>
+                </a>
+                <button class="cart" >
+                    Add to Cart
+                    <i class="fa fa-shopping-cart" style="color: white;"></i>
+                </button>
             </article>
         </div>
 

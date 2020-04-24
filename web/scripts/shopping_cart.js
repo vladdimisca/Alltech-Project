@@ -22,20 +22,42 @@ window.onload = function () {
                     let paragraph = document.getElementById('cartMessage');
                     paragraph.innerText = 'Your cart is empty.';
 
-                    response.forEach(function (item) {
-                        if (paragraph)
-                            paragraph.remove();
+                    if(response.hasOwnProperty('failure')) {
+                        paragraph.innerText = response.failure;
+                    } else {
+                        response.forEach(function (item) {
+                            if (paragraph)
+                                paragraph.remove();
 
-                        let image = document.createElement('img');
+                            let archive = this.document.createElement('div');
+                            archive.setAttribute ('class', 'archive');
 
-                        image.src = item.source;
-                        image.alt = "Not available";
-                        image.setAttribute('width', '50%');
+                            let article = this.document.createElement('div');
+                            article.setAttribute('class', 'article');
 
-                        container.appendChild(image);
-                        container.appendChild(document.createTextNode(item.number));
-                        container.appendChild(document.createElement('br'));
-                    });
+                            archive.appendChild(article);
+
+                            let para = document.createElement('p');
+                            let node = document.createTextNode (item.number);
+                            para.appendChild(node);
+                            para.id = "para";
+                            let close = document.createElement('i');
+                            close.className = "fa fa-close";
+                            close.style = "font-size:20px;color:red";
+
+                            let image = document.createElement('img');
+
+                            image.src = item.source;
+                            image.alt = "Not available";
+
+                            article.appendChild(image);
+                            article.appendChild(para);
+                            article.appendChild(close);
+
+                            container.appendChild(archive);
+                            container.appendChild(document.createElement('br'));
+                        });
+                    }
                 }
             };
 

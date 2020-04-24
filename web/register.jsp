@@ -16,11 +16,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}index.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}register.css">
         <script src="scripts/register.js"></script>
     </head>
 
-    <body>
+<body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
         <a href="index.jsp" class="navbar-brand">Alltech</a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#Menu">
@@ -30,14 +30,14 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Products</a>
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item">Televisions</a>
-                        <a href="#" class="dropdown-item">Laptops</a>
-                        <a href="#" class="dropdown-item">Smartphones</a>
+                    <div class="dropdown-menu bg-dark">
+                        <a href="televisions.jsp" class="dropdown-item nav-item">Televisions</a>
+                        <a href="laptops.jsp" class="dropdown-item nav-item">Laptops</a>
+                        <a href="phones.jsp" class="dropdown-item nav-item">Smartphones</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="register.jsp" class="nav-link active">Account</a>
+                    <a href="register.jsp" class="nav-link">Account</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -50,7 +50,7 @@
 
         <form name="registerForm" method="post" action="register" id="registerForm">
             <div class="container">
-                <h1 class="center">Create an account</h1>
+                <h2 class="center">Create an account</h2>
                 <hr>
 
                 <label for="firstName" class="required"><b>First Name</b></label>
@@ -67,7 +67,7 @@
                 <input pattern=".{5,12}" type="password" placeholder="Enter Password" name="password" id="password" required title="Length has to be from 5 to 12 characters">
 
                 <hr>
-                <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+                <p>By creating an account you agree to our <a href="privacy.jsp">Terms & Privacy</a>.</p>
 
                 <button type="submit" class="registerbtn">Register</button>
             </div>

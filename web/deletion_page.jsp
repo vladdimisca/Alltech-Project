@@ -16,10 +16,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}index.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}register.css">
     <script src="scripts/deletion.js"></script>
 </head>
-    <body>
+<body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
         <a href="index.jsp" class="navbar-brand">Alltech</a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#Menu">
@@ -29,14 +29,14 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Products</a>
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item">Televisions</a>
-                        <a href="#" class="dropdown-item">Laptops</a>
-                        <a href="#" class="dropdown-item">Smartphones</a>
+                    <div class="dropdown-menu bg-dark">
+                        <a href="televisions.jsp" class="dropdown-item nav-item">Televisions</a>
+                        <a href="laptops.jsp" class="dropdown-item nav-item">Laptops</a>
+                        <a href="phones.jsp" class="dropdown-item nav-item">Smartphones</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="user_profile.jsp" class="nav-link">Account</a>
+                    <a href="register.jsp" class="nav-link">Account</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -47,21 +47,22 @@
         </div>
     </nav>
 
-        <form name="deletionForm" method="post" action="deletion_page" id="deletionForm">
-            <div class="container">
+    <form name="deletionForm" method="post" action="deletion_page" id="deletionForm">
+        <div class="container">
 
-                <h1 class="center">Confirm account deletion</h1>
-                <hr>
+            <h2 class="center">Confirm account deletion</h2>
+            <hr>
 
-                <label id="email"><b>Email: </b></label>
-                <br>
+            <label id="email"><b> &nbsp;Email: &nbsp; </b></label>
+            <br>
+            <br>
 
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Confirm Password" name="psw" id="psw" required>
+            <label for="psw" ><b> &nbsp;Password</b></label>
+            <input type="password" placeholder="Confirm Password" name="psw" id="psw" required>
 
-                <hr>
-                <button type="submit" class="registerbtn">Confirm</button>
-            </div>
-        </form>
-    </body>
+            <hr>
+            <button type="submit" class="registerbtn">Confirm</button>
+        </div>
+    </form>
+</body>
 </html>

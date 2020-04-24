@@ -46,52 +46,52 @@
 
     <div class="archive">
         <div class="grow">
-            <a href="huawei.jsp">
-                <article class="article">
+            <article class="article">
+                <a href="huawei.jsp">
                     <img  src="huawei.jpg" alt="Huawei" >
                     <hr>
                     <p class="par">Huawei P30 Lite mobile phone, 128 GB, 4 GB RAM</p>
                     <hr>
                     <p class="price"> $250</p>
                     <hr>
-            </a>
-            <button class="cart" >
-                Add to Cart
-                <i class="fa fa-shopping-cart" style="color: white;"></i>
-            </button>
+                </a>
+                <button class="cart" >
+                    Add to Cart
+                    <i class="fa fa-shopping-cart" style="color: white;"></i>
+                </button>
             </article>
         </div>
         <div class="grow">
-            <a href="A71.jsp">
                 <article class="article">
-                    <img  src="A71.jpg" alt="Samsung A71" >
-                    <hr>
-                    <p class="par"> Samsung Galaxy A71 mobile phone, 128GB, 6GB RAM</p>
-                    <hr>
-                    <p class="price"> $430</p>
-                    <hr>
-            </a>
-            <button class="cart" >
-                Add to Cart
-                <i class="fa fa-shopping-cart" style="color: white;"></i>
-            </button>
-            </article>
-        </div>
+                    <a href="A71.jsp">
+                        <img  src="A71.jpg" alt="Samsung A71" >
+                        <hr>
+                        <p class="par"> Samsung Galaxy A71 mobile phone, 128GB, 6GB RAM</p>
+                        <hr>
+                        <p class="price"> $430</p>
+                        <hr>
+                    </a>
+                    <button class="cart" >
+                        Add to Cart
+                        <i class="fa fa-shopping-cart" style="color: white;"></i>
+                    </button>
+                </article>
+            </div>
         <div class="grow">
-            <a href="apple.jsp">
                 <article class="article">
-                    <img  src="apple.jpg" alt="Apple phone" >
-                    <hr>
-                    <p class="par">Apple iPhone 11 Mobile Phone, 64GB, Black</p>
-                    <hr>
-                    <p class="price"> $820</p>
-                    <hr>
-            </a>
-            <button class="cart" >
-                Add to Cart
-                <i class="fa fa-shopping-cart" style="color: white;"></i>
-            </button>
-            </article>
+                    <a href="apple.jsp">
+                        <img  src="apple.jpg" alt="Apple phone" >
+                        <hr>
+                        <p class="par">Apple iPhone 11 Mobile Phone, 64GB, Black</p>
+                        <hr>
+                        <p class="price"> $820</p>
+                        <hr>
+                    </a>
+                    <button class="cart" >
+                        Add to Cart
+                        <i class="fa fa-shopping-cart" style="color: white;"></i>
+                    </button>
+                </article>
         </div>
     </div>
 </div>

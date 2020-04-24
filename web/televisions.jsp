@@ -46,53 +46,51 @@
 
     <div class="archive">
         <div class="grow">
-            <a href="samsung.jsp">
                 <article class="article">
+                    <a href="samsung.jsp">
                     <img  src="Samsung.jpeg" alt="samsung" >
                     <hr>
                     <p class="par">Samsung Smart LED TV, 108 cm, 43RU7092,4K Ultra HD</p>
                     <hr>
                     <p class="price"> $299</p>
                     <hr>
-            </a>
-            <button class="cart" >
-                Add to Cart
-                <i class="fa fa-shopping-cart" style="color: white;"></i>
-            </button>
+                    </a>
+                    <button class="cart" >
+                         Add to Cart
+                        <i class="fa fa-shopping-cart" style="color: white;"></i>
+                     </button>
+                </article>
+        </div>
+        <div class="grow">
+                <article class="article">
+                    <a href="LG.jsp">
+                        <img  src="LG.jpg" alt="samsung" >
+                        <hr>
+                        <p class="par">LG Smart LED TV, 108 cm, 43UM7450PLA, 4K Ultra HD</p>
+                        <hr>
+                        <p class="price"> $390</p>
+                        <hr>
+                    </a>
+                    <button class="cart" >
+                        Add to Cart
+                        <i class="fa fa-shopping-cart" style="color: white;"></i>
+                    </button>
             </article>
         </div>
         <div class="grow">
-            <a href="LG.jsp">
-                <article class="article">
-                    <img  src="LG.jpg" alt="samsung" >
-                    <hr>
-                    <p class="par">LG Smart LED TV, 108 cm, 43UM7450PLA, 4K Ultra HD</p>
-                    <hr>
-                    <p class="price"> $390</p>
-                    <hr>
-            </a>
-            <a href="#">
-                <p><button class="cart" >
-                    Add to Cart
-                    <i class="fa fa-shopping-cart" style="color: white;"></i>
-                </button></p>
-            </a>
-            </article>
-        </div>
-        <div class="grow">
-            <a href="curvedTV.jsp">
-                <article class="article">
+            <article class="article">
+                <a href="curvedTV.jsp">
                     <img  src="Curved.jpeg" alt="Samsung Curved TV" >
                     <hr>
                     <p class="par">Samsung Smart Curved LED TV, 123 cm, 49RU7302, 4K</p>
                     <hr>
                     <p class="price"> $450</p>
                     <hr>
-            </a>
-            <button class="cart" >
-                Add to Cart
-                <i class="fa fa-shopping-cart" style="color: white;"></i>
-            </button>
+                </a>
+                <button class="cart" >
+                    Add to Cart
+                    <i class="fa fa-shopping-cart" style="color: white;"></i>
+                </button>
             </article>
         </div>
     </div>

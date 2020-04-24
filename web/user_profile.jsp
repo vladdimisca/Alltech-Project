@@ -36,14 +36,14 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Products</a>
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item">Televisions</a>
-                        <a href="#" class="dropdown-item">Laptops</a>
-                        <a href="#" class="dropdown-item">Smartphones</a>
+                    <div class="dropdown-menu bg-dark">
+                        <a href="televisions.jsp" class="dropdown-item nav-item">Televisions</a>
+                        <a href="laptops.jsp" class="dropdown-item nav-item">Laptops</a>
+                        <a href="phones.jsp" class="dropdown-item nav-item">Smartphones</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="user_profile.jsp" class="nav-link active">Account</a>
+                    <a href="register.jsp" class="nav-link">Account</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -55,13 +55,13 @@
     </nav>
 
     <div class="container">
-        <h1 class="center">Account details</h1>
+        <h2 class="center">Account details</h2>
         <hr>
 
         <div id="logged"> </div>
         <hr>
 
-        <h2>Actions</h2>
+        <h3>Actions</h3>
 
         <button class="button" onclick="logout()">Logout</button>
         <br>

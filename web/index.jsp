@@ -55,9 +55,7 @@
     <h3> The site of your technology</h3>
 
     <p>We offer a variety of products that might interest you.</p>
-    <br>
     <p class="margin">Choose the category you want to buy from.</p>
-
 
     <div class="archive">
       <a class="grow" href="televisions.jsp">
@@ -75,8 +73,8 @@
       <a class="grow" href="phones.jsp">
         <article class="article">
           <img  src="phone1.jpg" alt="phone" >
-          <p class="par"> Smartphones</p>
         </article>
+          <p class="par"> Smartphones</p>
       </a>
     </div>
   </div>
