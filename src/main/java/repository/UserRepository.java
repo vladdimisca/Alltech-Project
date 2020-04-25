@@ -30,6 +30,9 @@ public class UserRepository {
             statement.setString(4, user.getPassword());
 
             statement.executeUpdate();
+
+            statement.close();
+            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
         }
@@ -87,6 +90,9 @@ public class UserRepository {
 
             statement.setString(1, email);
             statement.execute();
+
+            statement.close();
+            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
         }

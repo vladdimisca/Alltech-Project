@@ -7,7 +7,6 @@ import model.Product;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import service.CartService;
-import service.ProductService;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,47 +23,30 @@ public class CartRequest extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String email = req.getParameter("email");
 
-        if(email != null) {
-            try {
-                ArrayList<Product> cart = CartService.getInstance().getCartByEmail(email);
-                JSONArray jsonArray = new JSONArray();
 
-                for (Product item : cart) {
-                    JSONObject json = new JSONObject();
+        try {
+            ArrayList<Product> cart = CartService.getInstance().getCartByEmail(email);
+            JSONArray jsonArray = new JSONArray();
 
-                    json.put("source", item.getSource());
-                    json.put("number", item.getNumber());
-
-                    jsonArray.add(json);
-                }
-
-                resp.getWriter().write(String.valueOf(jsonArray));
-            } catch (ProductNotFoundException e) {
+            for (Product item : cart) {
                 JSONObject json = new JSONObject();
 
-                json.put("failure", "Some of your products may not be added due to some technical issues.");
+                json.put("source", item.getSource());
+                json.put("number", item.getNumber());
 
-                resp.getWriter().write(String.valueOf(json));
-                e.printStackTrace();
+                jsonArray.add(json);
             }
-        } else {
-            Integer productId = Integer.parseInt(req.getParameter("productId"));
 
+            resp.getWriter().write(String.valueOf(jsonArray));
+        } catch (ProductNotFoundException e) {
             JSONObject json = new JSONObject();
 
-            try {
-                int productNumber = ProductService.getInstance().getNumberById(productId);
-
-                if(productNumber == 0) {
-                    json.put("stock", "Out of stock");
-                }
-            } catch (ProductNotFoundException e) {
-                json.put("stock", "Temporary unavailable");
-                e.printStackTrace();
-            }
+            json.put("failure", "Your products have not been added due to some technical issues.");
 
             resp.getWriter().write(String.valueOf(json));
+            e.printStackTrace();
         }
+
     }
 
     @Override

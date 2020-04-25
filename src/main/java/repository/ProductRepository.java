@@ -32,6 +32,9 @@ public class ProductRepository {
             if(result.next()) {
                 return result.getInt("PRICE");
             }
+
+            statement.close();
+            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
         }
@@ -57,6 +60,9 @@ public class ProductRepository {
             if(result.next()) {
                 return result.getString("SRC");
             }
+
+            statement.close();
+            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
         }
@@ -82,6 +88,9 @@ public class ProductRepository {
             if(result.next()) {
                 return result.getInt("NUMBER");
             }
+
+            statement.close();
+            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
         }
@@ -107,6 +116,9 @@ public class ProductRepository {
             statement.setInt(2, id);
 
             statement.executeUpdate();
+
+            statement.close();
+            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
         }
