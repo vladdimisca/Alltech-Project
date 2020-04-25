@@ -96,7 +96,7 @@
                     </li>
                 </ul>
                 <hr>
-                <p style="text-align: center;">In stock</p>
+                <p style="text-align: center;" id="stock">In stock</p>
                 <hr>
             </div>
             <button class="cart" id="lgTV">

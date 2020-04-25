@@ -31,7 +31,7 @@ public class CartRepository {
         int number = 0;
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection dbConnection = DriverManager.getConnection(url, username, password);
             PreparedStatement statement = dbConnection.prepareStatement(sqlSelect);
 
@@ -55,15 +55,20 @@ public class CartRepository {
         if(productNumber == 0) {
             String sqlInsert = "INSERT INTO Cart (EMAIL, PRODUCT_ID, NUMBER) VALUES (?, ?, ?)";
 
-            try (Connection dbConnection = DriverManager.getConnection(url, username, password);
-                 PreparedStatement statement = dbConnection.prepareStatement(sqlInsert)) {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection dbConnection = DriverManager.getConnection(url, username, password);
+                PreparedStatement statement = dbConnection.prepareStatement(sqlInsert);
 
                 statement.setString(1, item.getEmail());
                 statement.setInt(2, item.getProductId());
                 statement.setInt(3, item.getNumber());
 
                 statement.executeUpdate();
-            } catch (SQLException e) {
+
+                statement.close();
+                dbConnection.close();
+            } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         } else {
@@ -74,14 +79,19 @@ public class CartRepository {
                     "SET NUMBER = ? " +
                     "WHERE PRODUCT_ID = ?";
 
-            try (Connection dbConnection = DriverManager.getConnection(url, username, password);
-                 PreparedStatement statement = dbConnection.prepareStatement(sqlUpdate)) {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection dbConnection = DriverManager.getConnection(url, username, password);
+                PreparedStatement statement = dbConnection.prepareStatement(sqlUpdate);
 
                 statement.setInt(1, productNumber);
                 statement.setInt(2, item.getProductId());
 
                 statement.executeUpdate();
-            } catch (SQLException e) {
+
+                statement.close();
+                dbConnection.close();
+            } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }
@@ -94,13 +104,18 @@ public class CartRepository {
                 "CART " +
                 "WHERE EMAIL = ? AND PRODUCT_ID = ?";
 
-        try(Connection dbConnection = DriverManager.getConnection(url, username, password);
-            PreparedStatement statement = dbConnection.prepareStatement(sqlDelete)) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection dbConnection = DriverManager.getConnection(url, username, password);
+            PreparedStatement statement = dbConnection.prepareStatement(sqlDelete);
 
             statement.setString(1, email);
             statement.setInt(2, productId);
             statement.execute();
-        } catch (SQLException e) {
+
+            statement.close();
+            dbConnection.close();
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -115,8 +130,10 @@ public class CartRepository {
 
         ArrayList<Product> cart = new ArrayList<>();
 
-        try(Connection dbConnection = DriverManager.getConnection(url, username, password);
-            PreparedStatement statement = dbConnection.prepareStatement(sqlSelect)) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection dbConnection = DriverManager.getConnection(url, username, password);
+            PreparedStatement statement = dbConnection.prepareStatement(sqlSelect);
 
             statement.setString(1, email);
             ResultSet result = statement.executeQuery();
@@ -130,7 +147,10 @@ public class CartRepository {
                 Product item = new Product(productId, number, src, price);
                 cart.add(item);
             }
-        } catch (SQLException e)   {
+
+            statement.close();
+            dbConnection.close();
+        } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
         }
 
