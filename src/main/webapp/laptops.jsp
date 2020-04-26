@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="scripts/user_profile.js"></script>
+    <script src="scripts/index.js"></script>
 </head>
 
 <body>
@@ -55,7 +55,7 @@
                     <p class="price"> $370</p>
                     <hr>
                 </a>
-                <button class="cart" >
+                <button class="cart" id="dellLaptop">
                     Add to Cart
                     <i class="fa fa-shopping-cart" style="color: white;"></i>
                 </button>
@@ -71,7 +71,7 @@
                     <p class="price"> $650</p>
                     <hr>
                 </a>
-                <button class="cart" >
+                <button class="cart" id="asusLaptop">
                     Add to Cart
                     <i class="fa fa-shopping-cart" style="color: white;"></i>
                 </button>
@@ -87,7 +87,7 @@
                     <p class="price"> $1499</p>
                     <hr>
                 </a>
-                <button class="cart" >
+                <button class="cart" id="lenovoLaptop">
                     Add to Cart
                     <i class="fa fa-shopping-cart" style="color: white;"></i>
                 </button>

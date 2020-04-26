@@ -10,7 +10,6 @@ window.onload = function () {
                 targetLink.setAttribute("href", "user_profile.jsp");
             }
 
-
             let email = localStorage.getItem('email');
             const xHttpCart = new XMLHttpRequest();
 
