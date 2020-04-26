@@ -23,7 +23,6 @@ public class CartRequest extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String email = req.getParameter("email");
 
-
         try {
             ArrayList<Product> cart = CartService.getInstance().getCartByEmail(email);
             JSONArray jsonArray = new JSONArray();

@@ -92,6 +92,8 @@ function addToCart(button, email, productId) {
         p.style.fontSize = 'x-large';
     }
 
+    p.style.display = 'block';
+
     if(email === null) {
         p.innerHTML = "You must be logged in";
     } else {
@@ -118,6 +120,10 @@ function addToCart(button, email, productId) {
     checkStock(productId);
 
     button.parentNode.insertBefore(p, button.nextSibling);
+
+    setTimeout(function() {
+        p.style.display = 'none';
+    }, 3000);
 }
 
 function checkStock(productId) {
