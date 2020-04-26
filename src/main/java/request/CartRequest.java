@@ -7,7 +7,9 @@ import model.Product;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import service.CartService;
+import service.ProductService;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +32,7 @@ public class CartRequest extends HttpServlet {
             for (Product item : cart) {
                 JSONObject json = new JSONObject();
 
+                json.put("productId", item.getProductId());
                 json.put("source", item.getSource());
                 json.put("number", item.getNumber());
 
@@ -65,6 +68,28 @@ public class CartRequest extends HttpServlet {
             e.printStackTrace();
         } catch (ProductNotFoundException e) {
             json.put("failure", "Product couldn't be added due to some technical issues");
+            e.printStackTrace();
+        }
+
+        resp.getWriter().write(String.valueOf(json));
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String email = req.getParameter("email");
+        Integer productId = Integer.parseInt(req.getParameter("productId"));
+        Integer productNumber = Integer.parseInt(req.getParameter("number"));
+
+        JSONObject json = new JSONObject();
+        try {
+            CartService.getInstance().removeCartItem(email, productId);
+
+            json.put("success", "Item deleted from cart");
+
+            ProductService.getInstance().restoreStock(productId, productNumber);
+        }
+        catch (ProductNotFoundException e) {
+            json.put("failure", "Product couldn't be restored due to some technical issues");
             e.printStackTrace();
         }
 

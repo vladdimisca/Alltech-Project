@@ -32,4 +32,8 @@ public class CartService {
     public ArrayList<Product> getCartByEmail(String email) throws ProductNotFoundException {
         return cartRepository.getCartByEmail(email);
     }
+
+    public void removeCartItem(String email, Integer productId) throws ProductNotFoundException {
+        cartRepository.removeCartItem(email, productId);
+    }
 }
