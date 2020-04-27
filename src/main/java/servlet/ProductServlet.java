@@ -1,4 +1,4 @@
-package request;
+package servlet;
 
 import exceptions.ProductNotFoundException;
 import org.json.simple.JSONObject;
@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @WebServlet("/products")
 @SuppressWarnings("unchecked")
-public class ProductRequest extends HttpServlet {
+public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {

@@ -1,8 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: vladd
-  Date: 4/18/2020
---%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
   <head>
