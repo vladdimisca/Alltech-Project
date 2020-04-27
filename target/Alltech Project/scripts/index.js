@@ -77,10 +77,8 @@ function addToCart(button, email, productId) {
     if(p === null) {
         p = document.createElement('p');
         p.setAttribute('id', 'message');
-        p.style.textAlign = 'center';
-        p.style.fontWeight = 'bold';
-        p.style.marginTop = "2%";
-        p.style.fontSize = 'x-large';
+
+        d = document.createElement('div');
     }
 
     p.style.display = 'block';
@@ -108,10 +106,16 @@ function addToCart(button, email, productId) {
         xHttpAdd.send();
     }
 
-    button.parentNode.insertBefore(p, button);
+    d.appendChild(p);
+    button.parentNode.insertBefore(d, button);
 
     setTimeout(function() {
-        p.style.display = 'none';
-    }, 3000);
+
+        d.setAttribute('id', 'messages--delete');
+
+        p.addEventListener('transitionend', function() {
+            p.parentNode.removeChild(p);
+        });
+    }, 2000);
 }
 

@@ -50,6 +50,9 @@ function getCart(email) {
                 close.style = "font-size:20px;color:red;";
                 close.onclick = () => deleteItemFromCart(email, item.productId, item.number, archive, br);
 
+                close.onmouseover = function () { close.style = "font-size:20px;color:blue;cursor:pointer" };
+                close.onmouseout = function () { close.style = "font-size:20px;color:red;"; }
+
                 let image = document.createElement('img');
 
                 image.src = item.source;

@@ -35,14 +35,14 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="shopping_cart.jsp" class="nav-link">Shopping Cart</a>
+                        <a href="shopping_cart.jsp" class="nav-link" >Shopping Cart</a>
                     </li>
                 </ul>
             </div>
         </nav>
 
         <div class="container">
-            <h2>Shopping Cart</h2>
+            <h2 class = "center">Shopping Cart</h2>
             <hr>
             <p id="cartMessage">You are not logged in.</p>
         </div>
