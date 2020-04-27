@@ -80,7 +80,7 @@ window.onload = function () {
                 }
             };
 
-            xHttpProfile.open("GET", "user_profile?email=" + email, true);
+            xHttpProfile.open("GET", "user_account?email=" + email, true);
             xHttpProfile.send();
         }
 };

@@ -29,11 +29,11 @@ public class CartService {
         productService.decreaseNumberById(item.getProductId());
     }
 
-    public ArrayList<Product> getCartByEmail(String email) throws ProductNotFoundException {
+    public ArrayList<Product> getCartByEmail(String email) {
         return cartRepository.getCartByEmail(email);
     }
 
-    public void removeCartItem(String email, Integer productId) throws ProductNotFoundException {
+    public void removeCartItem(String email, Integer productId) {
         cartRepository.removeCartItem(email, productId);
     }
 }

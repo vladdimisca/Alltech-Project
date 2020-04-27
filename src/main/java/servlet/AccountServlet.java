@@ -1,7 +1,8 @@
-package request;
+package servlet;
 
 import exceptions.EmailNotFoundException;
 import exceptions.WrongPasswordException;
+import model.User;
 import org.json.simple.JSONObject;
 import service.AuthenticationService;
 import service.UserService;
@@ -12,13 +13,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/deletion_page")
-public class RemoveUserRequest extends HttpServlet {
-    UserService userService = UserService.getInstance();
-
-    @SuppressWarnings("unchecked")
+@SuppressWarnings("unchecked")
+@WebServlet("/user_account")
+public class AccountServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String email = req.getParameter("email");
+        User user = UserService.getInstance().getUserByEmail(email);
+
+        JSONObject json = new JSONObject();
+
+        json.put("firstName", user.getFirstName());
+        json.put("lastName", user.getLastName());
+        json.put("email", user.getEmail());
+
+        resp.getWriter().write(String.valueOf(json));
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
@@ -26,7 +39,7 @@ public class RemoveUserRequest extends HttpServlet {
 
         try {
             AuthenticationService.getInstance().login(email, password);
-            userService.removeUserByEmail(email);
+            UserService.getInstance().removeUserByEmail(email);
 
             json.put("success", "success");
         } catch (EmailNotFoundException | WrongPasswordException e) {

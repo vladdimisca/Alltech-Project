@@ -1,4 +1,4 @@
-package request;
+package servlet;
 
 import exceptions.ExistingUserException;
 import model.User;
@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @SuppressWarnings("unchecked")
 @WebServlet("/register")
-public class RegisterRequest extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {

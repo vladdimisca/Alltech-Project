@@ -1,4 +1,4 @@
-package request;
+package servlet;
 
 import exceptions.EmailNotFoundException;
 import exceptions.WrongPasswordException;
@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @SuppressWarnings("unchecked")
 @WebServlet("/sign_in")
-public class LoginRequest extends HttpServlet {
+public class LoginServlet extends HttpServlet {
     AuthenticationService authenticationService = AuthenticationService.getInstance();
 
     @Override

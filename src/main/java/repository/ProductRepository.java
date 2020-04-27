@@ -124,7 +124,7 @@ public class ProductRepository {
         }
     }
 
-    public void restoreStock (Integer id, Integer number) throws ProductNotFoundException {
+    public void restoreStock(Integer id, Integer number) throws ProductNotFoundException {
         int productNumber = getNumberById(id) + number;
 
         String sqlUpdate = "" +

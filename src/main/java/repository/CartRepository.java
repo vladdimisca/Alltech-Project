@@ -120,7 +120,7 @@ public class CartRepository {
         }
     }
 
-    public ArrayList<Product> getCartByEmail(String email) throws ProductNotFoundException {
+    public ArrayList<Product> getCartByEmail(String email) {
         String sqlSelect = "" +
                 "SELECT " +
                 "PRODUCT_ID, " +
@@ -150,7 +150,7 @@ public class CartRepository {
 
             statement.close();
             dbConnection.close();
-        } catch (SQLException | ClassNotFoundException e)   {
+        } catch (SQLException | ClassNotFoundException | ProductNotFoundException e)   {
             e.printStackTrace();
         }
 

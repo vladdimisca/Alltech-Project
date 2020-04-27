@@ -11,11 +11,11 @@ window.onload = function () {
 
             let email = localStorage.getItem('email');
 
-            GetCart(email);
+            getCart(email);
         }
 };
 
-function GetCart(email) {
+function getCart(email) {
     const xHttpCart = new XMLHttpRequest();
 
     xHttpCart.onreadystatechange = function () {
@@ -26,44 +26,42 @@ function GetCart(email) {
             let paragraph = document.getElementById('cartMessage');
             paragraph.innerText = 'Your cart is empty.';
 
-            if(response.hasOwnProperty('failure')) {
-                paragraph.innerText = response.failure;
-            } else {
-                response.forEach(function (item) {
-                    if (paragraph)
-                        paragraph.style.display = "none";
 
-                    let archive = document.createElement('div');
-                    archive.setAttribute ('class', 'archive');
+            response.forEach(function (item) {
+                if (paragraph)
+                    paragraph.style.display = "none";
 
-                    let article = document.createElement('div');
-                    article.setAttribute('class', 'article');
+                let archive = document.createElement('div');
+                archive.setAttribute ('class', 'archive');
 
-                    archive.appendChild(article);
+                let article = document.createElement('div');
+                article.setAttribute('class', 'article');
 
-                    let br = document.createElement('br');
+                archive.appendChild(article);
 
-                    let para = document.createElement('p');
-                    para.innerHTML = "x" + item.number;
-                    para.id = "para";
-                    let close = document.createElement('i');
-                    close.className = "fa fa-close";
-                    close.style = "font-size:20px;color:red;";
-                    close.onclick = () => DeleteItemFromCart(email, item.productId, item.number, archive, br);
+                let br = document.createElement('br');
 
-                    let image = document.createElement('img');
+                let para = document.createElement('p');
+                para.innerHTML = "x" + item.number;
+                para.id = "para";
 
-                    image.src = item.source;
-                    image.alt = "Not available";
+                let close = document.createElement('i');
+                close.className = "fa fa-close";
+                close.style = "font-size:20px;color:red;";
+                close.onclick = () => deleteItemFromCart(email, item.productId, item.number, archive, br);
 
-                    article.appendChild(image);
-                    article.appendChild(para);
-                    article.appendChild(close);
+                let image = document.createElement('img');
 
-                    container.appendChild(archive);
-                    container.appendChild(br);
-                });
-            }
+                image.src = item.source;
+                image.alt = "Not available";
+
+                article.appendChild(image);
+                article.appendChild(para);
+                article.appendChild(close);
+
+                container.appendChild(archive);
+                container.appendChild(br);
+            });
         }
     };
 
@@ -71,7 +69,7 @@ function GetCart(email) {
     xHttpCart.send();
 }
 
-function DeleteItemFromCart(email, productId, number, div, br) {
+function deleteItemFromCart(email, productId, number, div, br) {
     const xHttpDelete = new XMLHttpRequest();
 
     xHttpDelete.onreadystatechange = function () {
@@ -81,7 +79,6 @@ function DeleteItemFromCart(email, productId, number, div, br) {
             if (response.hasOwnProperty('success')) {
                 div.remove();
                 br.remove();
-
             }
         }
     }
@@ -89,5 +86,5 @@ function DeleteItemFromCart(email, productId, number, div, br) {
     xHttpDelete.open("DELETE","shopping_cart?email=" + email + "&productId=" + productId + "&number=" + number , true);
     xHttpDelete.send();
 
-    let replace = window.location.replace("shopping_cart.jsp");
+    window.location.replace("shopping_cart.jsp");
 }

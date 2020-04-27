@@ -40,7 +40,7 @@ window.onload = function () {
                     }
                 };
 
-                xHttpDelete.open("POST", "deletion_page?email=" + email + "&password=" + password.value, true);
+                xHttpDelete.open("DELETE", "user_account?email=" + email + "&password=" + password.value, true);
                 xHttpDelete.send();
             }
         }
