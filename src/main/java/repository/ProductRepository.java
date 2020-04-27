@@ -123,4 +123,30 @@ public class ProductRepository {
             e.printStackTrace();
         }
     }
+
+    public void restoreStock (Integer id, Integer number) throws ProductNotFoundException {
+        int productNumber = getNumberById(id) + number;
+
+        String sqlUpdate = "" +
+                "UPDATE " +
+                "PRODUCTS " +
+                "SET NUMBER = ? " +
+                "WHERE PRODUCT_ID = ?";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection dbConnection = DriverManager.getConnection(url, username, password);
+            PreparedStatement statement = dbConnection.prepareStatement(sqlUpdate);
+
+            statement.setInt(1, productNumber);
+            statement.setInt(2, id);
+
+            statement.executeUpdate();
+
+            statement.close();
+            dbConnection.close();
+        } catch (SQLException | ClassNotFoundException e)   {
+            e.printStackTrace();
+        }
+    }
 }

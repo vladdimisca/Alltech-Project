@@ -26,4 +26,8 @@ public class ProductService {
     public void decreaseNumberById(Integer id) throws ProductNotFoundException {
         productRepository.decreaseNumberById(id);
     }
+
+    public void restoreStock(Integer id, Integer productNumber) throws ProductNotFoundException {
+        productRepository.restoreStock(id, productNumber);
+    }
 }

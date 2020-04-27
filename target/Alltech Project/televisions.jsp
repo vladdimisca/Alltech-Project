@@ -55,7 +55,7 @@
                     <p class="price"> $299</p>
                     <hr>
                     </a>
-                    <button class="cart" >
+                    <button class="cart" id="samsungTV">
                          Add to Cart
                         <i class="fa fa-shopping-cart" style="color: white;"></i>
                      </button>
@@ -71,7 +71,7 @@
                         <p class="price"> $390</p>
                         <hr>
                     </a>
-                    <button class="cart" >
+                    <button class="cart" id="lgTV">
                         Add to Cart
                         <i class="fa fa-shopping-cart" style="color: white;"></i>
                     </button>
@@ -87,7 +87,7 @@
                     <p class="price"> $450</p>
                     <hr>
                 </a>
-                <button class="cart" >
+                <button class="cart" id="curvedTV">
                     Add to Cart
                     <i class="fa fa-shopping-cart" style="color: white;"></i>
                 </button>
