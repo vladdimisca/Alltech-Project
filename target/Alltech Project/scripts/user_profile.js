@@ -212,9 +212,12 @@ function changeEm (changeEmail, articleEmail, oldEmail) {
 
     let input = document.createElement('input');
     input.value = oldEmail;
+    input.type = "text";
     input.style.marginTop = "3px";
     input.style.marginLeft = "5px";
     input.style.fontSize = "larger";
+    input.pattern = "^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";
+    input.required = "true";
 
     button.innerText = "Submit";
 
@@ -228,7 +231,26 @@ function changeEm (changeEmail, articleEmail, oldEmail) {
             if (this.readyState === 4 && this.status === 200) {
                 const response = JSON.parse(this.response);
 
-                if (response.hasOwnProperty('success')) {
+                if (text === oldEmail) {
+                    if (document.getElementById('message')) {
+                        let message = document.getElementById('message');
+                        message.parentNode.removeChild(message);
+                    }
+                    articleEmail.removeChild(email);
+                    articleEmail.removeChild(input);
+
+                    let newEmail = document.createElement('h4');
+
+                    newEmail.innerText = 'Email: ' + text;
+
+                    button.innerText = "Change";
+
+                    articleEmail.insertBefore(newEmail, button);
+
+                    changeEmail.onclick = () => changeEm(changeEmail, articleEmail, text);
+                }
+                else
+                if(response.hasOwnProperty('success')) {
                     if (document.getElementById('message')) {
                         let message = document.getElementById('message');
                         message.parentNode.removeChild(message);
