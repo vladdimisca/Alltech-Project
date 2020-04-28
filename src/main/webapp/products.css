@@ -165,6 +165,21 @@ body{
     color: black;
 }
 
+#messages {
+    overflow-x: hidden; }
+
+#message {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 2%;
+    font-size: x-large;
+    transition: opacity 1.25s ;
+    opacity: 1;
+}
+
+#messages--delete #message {
+    opacity: 0;
+}
 
 @media screen and (max-width: 1100px){
     .container {

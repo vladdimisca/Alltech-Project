@@ -55,11 +55,11 @@
     <div id="logged"> </div>
     <hr>
 
-    <h3>Actions</h3>
+    <h3 id="messageFail">Actions</h3>
 
     <button class="button" onclick="logout()">Logout</button>
     <br>
-    <button type="submit" class="button" onclick="">Change Password</button>
+    <button type="submit" class="button" onclick="changePassword()">Change Password</button>
     <br>
     <button type="submit" class="button" onclick="deletionPage()">Delete account</button>
 </div>

@@ -156,5 +156,28 @@ public class CartRepository {
 
         return cart;
     }
+
+    public void updateEmail(String oldEmail, String newEmail) {
+        String sqlUpdate = "" +
+                "UPDATE CART " +
+                "SET EMAIL = ? " +
+                "WHERE EMAIL = ?";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection dbConnection = DriverManager.getConnection(url, username, password);
+            PreparedStatement statement = dbConnection.prepareStatement(sqlUpdate);
+
+            statement.setString(1, newEmail);
+            statement.setString(2, oldEmail);
+
+            statement.executeUpdate();
+
+            statement.close();
+            dbConnection.close();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

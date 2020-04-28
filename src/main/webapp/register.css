@@ -55,10 +55,49 @@ img {
 #para {
     font-size: 140%;
     font-family: 'Rouge Script', cursive;
-    padding: 40px 20px 20px 20px;
+    padding: 38px 20px 3px 15px;
 }
 
+.qty .plus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: white;
+    width: 25px;
+    height: 25px;
+    font: 25px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+    margin-top:0;
+    padding: 0;
+}
+.qty .minus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: white;
+    width: 25px;
+    height: 25px;
+    font: 25px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+    background-clip: padding-box;
+    margin-top: 0;
+    padding: 0;
+}
 
+.minus:hover{
+    background-color: #717fe0 !important;
+}
+.plus:hover{
+    background-color: #717fe0 !important;
+}
+/*Prevent text selection*/
+span{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
 .archive {
     display: grid;
     width: 100%;
@@ -92,8 +131,8 @@ img {
         margin-bottom: 30px;
     }
     #para {
-        padding: 50px 15px 15px 15px;
-        font-size: 200%;
+        padding: 40px 15px 5px 15px;
+        font-size: 160%;
     }
 
 }
@@ -123,7 +162,7 @@ img {
         font-size: 95%;
     }
     #para {
-        padding: 30px 15px 15px 15px;
+        padding: 30px 15px 5px 15px;
         font-size: 130%;
     }
 
@@ -132,6 +171,7 @@ img {
 @media screen and (max-width: 700px){
     .container {
         margin-top: 10%;
+        width: 80vw;
     }
     #cf {
         width: 100%;
@@ -154,13 +194,15 @@ img {
         font-size: 90%;
     }
     #para {
-        padding: 30px 15px 15px 15px;
+        padding: 30px 15px 3px 15px;
+        font-size: 130%;
     }
 }
 
 @media screen and (max-width: 550px){
     .container {
         margin-top: 12%;
+        width: 85vw;
     }
     #cf {
         width: 100%;
@@ -186,7 +228,7 @@ img {
         font-size: 85%;
     }
     #para {
-        padding: 35px 15px 15px 15px;
+        padding: 30px 15px 3px 15px;
         font-size: 110%;
     }
 }
@@ -194,6 +236,7 @@ img {
 @media screen and (max-width: 450px){
     .container {
         margin-top: 17%;
+        width: 90vw;
     }
     #cf {
         width: 100%;
@@ -218,7 +261,34 @@ img {
         font-size: 80%;
     }
     #para {
-        padding: 17px 5px 5px 5px;
+        padding: 17px 5px 2px 5px;
+        font-size: 110%;
+    }
+    .qty .plus {
+        width: 18px;
+        height: 18px;
+        font: 18px/1 Arial,sans-serif;
+    }
+    .qty .minus {
+        width: 18px;
+        height: 18px;
+        font: 18px/1 Arial,sans-serif;
+    }
+}
+@media screen and (max-width: 330px){
+    .qty .plus {
+        width: 15px;
+        height: 15px;
+        font: 15px/1 Arial,sans-serif;
+    }
+    .qty .minus {
+        width: 15px;
+        height: 15px;
+        font: 15px/1 Arial,sans-serif;
+    }
+    #para {
+        padding: 15px 5px 2px 5px;
+        font-size: 100%;
     }
 }
 
@@ -280,10 +350,6 @@ hr {
 
 .button:hover {
     opacity: 1;
-}
-
-.fa-close:hover {
-    color:blue;
 }
 
 @media screen and (max-width: 600px) {
