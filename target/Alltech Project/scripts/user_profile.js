@@ -77,8 +77,7 @@ window.onload = function () {
                     detailsDiv.appendChild(archiveLast);
                     detailsDiv.appendChild(archiveEmail);
 
-                    changeFirst.addEventListener("click", () => changeFirstName( changeFirst, articleFirst, response.firstName));
-
+                    changeFirst.onclick = () => changeFirstName(changeFirst, articleFirst, response.firstName);
                 }
             };
 
@@ -106,8 +105,8 @@ function changePassword() {
     location.replace("change_password.jsp");
 }
 
-function changeFirstName( changeFirst, articleFirst, textName) {
-    changeFirst.removeEventListener("click", changeFirstName);
+function changeFirstName(changeFirst, articleFirst, textName) {
+    changeFirst.onclick = null;
 
     let text = articleFirst.firstChild;
     let button = articleFirst.childNodes[1];
@@ -128,7 +127,7 @@ function changeFirstName( changeFirst, articleFirst, textName) {
     articleFirst.insertBefore(input, button);
 
 
-    changeFirst.onclick = function () {
+    changeFirst.onclick = function() {
         let text = input.value;
 
         articleFirst.removeChild(firstName);
@@ -142,7 +141,7 @@ function changeFirstName( changeFirst, articleFirst, textName) {
 
         articleFirst.insertBefore(newFirstName, button);
 
-        
+        changeFirst.onclick = () => changeFirstName(changeFirst, articleFirst, text);
     }
 
 }
