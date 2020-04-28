@@ -6,6 +6,7 @@ import exceptions.WrongPasswordException;
 import model.User;
 import org.json.simple.JSONObject;
 import service.AuthenticationService;
+import service.CartService;
 import service.UserService;
 
 import javax.servlet.ServletException;
@@ -96,6 +97,7 @@ public class AccountServlet extends HttpServlet {
 
                 try {
                     UserService.getInstance().changeEmail(email, newEmail);
+                    CartService.getInstance().updateEmail(email, newEmail);
 
                     json.put("success", "success");
                 } catch (ExistingUserException e) {

@@ -226,6 +226,8 @@ function changeEm (changeEmail, articleEmail, oldEmail) {
     changeEmail.onclick = function() {
         let text = input.value;
 
+        localStorage.setItem("email", text);
+
         xHttpUpdate.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 const response = JSON.parse(this.response);

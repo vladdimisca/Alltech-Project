@@ -36,4 +36,8 @@ public class CartService {
     public void removeCartItem(String email, Integer productId) {
         cartRepository.removeCartItem(email, productId);
     }
+
+    public void updateEmail(String oldEmail, String newEmail) {
+        cartRepository.updateEmail(oldEmail, newEmail);
+    }
 }

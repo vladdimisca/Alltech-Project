@@ -212,12 +212,11 @@ function changeEm (changeEmail, articleEmail, oldEmail) {
 
     let input = document.createElement('input');
     input.value = oldEmail;
-    input.type = "text";
     input.style.marginTop = "3px";
     input.style.marginLeft = "5px";
     input.style.fontSize = "larger";
     input.pattern = "^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";
-    input.required = "true";
+    input.required = true;
 
     button.innerText = "Submit";
 
@@ -226,6 +225,8 @@ function changeEm (changeEmail, articleEmail, oldEmail) {
 
     changeEmail.onclick = function() {
         let text = input.value;
+
+        localStorage.setItem("email", text);
 
         xHttpUpdate.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
