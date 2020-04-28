@@ -1,6 +1,7 @@
 package repository;
 
 import model.User;
+import service.EncryptionService;
 
 import java.sql.*;
 
@@ -90,6 +91,104 @@ public class UserRepository {
 
             statement.setString(1, email);
             statement.execute();
+
+            statement.close();
+            dbConnection.close();
+        } catch (SQLException | ClassNotFoundException e)   {
+            e.printStackTrace();
+        }
+    }
+
+    public void changePassword (String email, String newPassword) {
+        String sqlUpdate = "" +
+                "UPDATE " +
+                "USERS " +
+                "SET PASSWORD = ? " +
+                "WHERE EMAIL = ?";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection dbConnection = DriverManager.getConnection(url, username, password);
+            PreparedStatement statement = dbConnection.prepareStatement(sqlUpdate);
+
+            String newPasswordEncrypted = EncryptionService.getInstance().encrypt(newPassword);
+
+            statement.setString(1, newPasswordEncrypted);
+            statement.setString(2, email);
+
+            statement.executeUpdate();
+
+            statement.close();
+            dbConnection.close();
+        } catch (SQLException | ClassNotFoundException e)   {
+            e.printStackTrace();
+        }
+    }
+
+    public void changeFirstName (String email, String newName) {
+        String sqlUpdate = "" +
+                "UPDATE " +
+                "USERS " +
+                "SET FIRST_NAME = ? " +
+                "WHERE EMAIL = ?";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection dbConnection = DriverManager.getConnection(url, username, password);
+            PreparedStatement statement = dbConnection.prepareStatement(sqlUpdate);
+
+            statement.setString(1, newName);
+            statement.setString(2, email);
+
+            statement.executeUpdate();
+
+            statement.close();
+            dbConnection.close();
+        } catch (SQLException | ClassNotFoundException e)   {
+            e.printStackTrace();
+        }
+    }
+
+    public void changeLastName (String email, String newName) {
+        String sqlUpdate = "" +
+                "UPDATE " +
+                "USERS " +
+                "SET LAST_NAME = ? " +
+                "WHERE EMAIL = ?";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection dbConnection = DriverManager.getConnection(url, username, password);
+            PreparedStatement statement = dbConnection.prepareStatement(sqlUpdate);
+
+            statement.setString(1, newName);
+            statement.setString(2, email);
+
+            statement.executeUpdate();
+
+            statement.close();
+            dbConnection.close();
+        } catch (SQLException | ClassNotFoundException e)   {
+            e.printStackTrace();
+        }
+    }
+
+    public void changeEmail (String email, String newEmail) {
+        String sqlUpdate = "" +
+                "UPDATE " +
+                "USERS " +
+                "SET EMAIL = ? " +
+                "WHERE EMAIL = ?";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection dbConnection = DriverManager.getConnection(url, username, password);
+            PreparedStatement statement = dbConnection.prepareStatement(sqlUpdate);
+
+            statement.setString(1, newEmail);
+            statement.setString(2, email);
+
+            statement.executeUpdate();
 
             statement.close();
             dbConnection.close();

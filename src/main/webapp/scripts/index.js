@@ -73,6 +73,7 @@ function autoGrow(oField) {
 
 function addToCart(button, email, productId) {
     let p = document.getElementById('message');
+    let d;
 
     if(p === null) {
         p = document.createElement('p');

@@ -2,25 +2,17 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>User Profile</title>
-
+    <title>Change password</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}profile.css">
-    <script src="scripts/user_profile.js"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}register.css">
+    <script src="scripts/update_profile.js"></script>
 </head>
-
 <body>
-<c:if test="${not empty param.email}">
-    <script>
-        login('${param.email}')
-    </script>
-</c:if>
-
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
     <a href="index.jsp" class="navbar-brand">Alltech</a>
     <button class="navbar-toggler" data-toggle="collapse" data-target="#Menu">
@@ -48,20 +40,22 @@
     </div>
 </nav>
 
-<div class="container">
-    <h2 class="center">Account details</h2>
-    <hr>
+<form action="user_account" id="changeForm" method="post" name="changeForm">
+    <div class="container">
 
-    <div id="logged"> </div>
-    <hr>
+        <h2 class="center">Change your password</h2>
+        <hr>
+        <br>
 
-    <h3>Actions</h3>
+        <label for="oldpsw" class="required"><b>&nbsp;Old password</b></label>
+        <input type="password" placeholder="Old Password" name="psw" id="oldpsw" required>
 
-    <button class="button" onclick="logout()">Logout</button>
-    <br>
-    <button type="submit" class="button" onclick="changePassword()">Change Password</button>
-    <br>
-    <button type="submit" class="button" onclick="deletionPage()">Delete account</button>
-</div>
+        <label for="newpsw" class="required"><b>&nbsp;New password</b></label>
+        <input pattern=".{5,12}" type="password" placeholder="New Password" name="psw" id="newpsw" required title="Length has to be from 5 to 12 characters">
+
+        <hr>
+        <button type="submit" class="registerbtn" >Confirm</button>
+    </div>
+</form>
 </body>
 </html>

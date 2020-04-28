@@ -77,6 +77,8 @@ window.onload = function () {
                     detailsDiv.appendChild(archiveLast);
                     detailsDiv.appendChild(archiveEmail);
 
+                    changeFirst.addEventListener("click", () => changeFirstName( changeFirst, articleFirst, response.firstName));
+
                 }
             };
 
@@ -98,5 +100,50 @@ function logout() {
 
 function deletionPage() {
     location.replace("deletion_page.jsp");
+}
+
+function changePassword() {
+    location.replace("change_password.jsp");
+}
+
+function changeFirstName( changeFirst, articleFirst, textName) {
+    changeFirst.removeEventListener("click", changeFirstName);
+
+    let text = articleFirst.firstChild;
+    let button = articleFirst.childNodes[1];
+    articleFirst.removeChild(text);
+
+    let firstName = document.createElement('h4');
+    firstName.innerText = "First name:"
+
+    let input = document.createElement('input');
+    input.value = textName;
+    input.style.marginTop = "3px";
+    input.style.marginLeft = "5px";
+    input.style.fontSize = "larger";
+
+    button.innerText = "Submit";
+
+    articleFirst.insertBefore(firstName, button);
+    articleFirst.insertBefore(input, button);
+
+
+    changeFirst.onclick = function () {
+        let text = input.value;
+
+        articleFirst.removeChild(firstName);
+        articleFirst.removeChild(input);
+
+        let newFirstName = document.createElement('h4');
+
+        newFirstName.innerText = 'First name: ' + text;
+
+        button.innerText = "Change";
+
+        articleFirst.insertBefore(newFirstName, button);
+
+
+    }
+
 }
 
