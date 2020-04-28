@@ -40,11 +40,14 @@ function updatePassword (event, email) {
                 window.location.replace('sign_in.jsp?message=' + response.success);
 
             } else {
-                let message = document.createElement('h4');
-                newPassword.parentNode.insertBefore(message, newPassword.nextSibling);
-                message.innerHTML = response.failure;
+                if (!document.getElementById('message')) {
+                    let message = document.createElement('h4');
+                    message.setAttribute('id', 'message');
+                    newPassword.parentNode.insertBefore(message, newPassword.nextSibling);
+                    message.innerHTML = response.failure;
                 }
             }
+        }
     };
 
     xHttpUpdate.open("POST", "user_account?type=" + "1" + "&email=" + email + "&oldPassword=" + oldPassword.value + "&newPassword=" + newPassword.value, true);

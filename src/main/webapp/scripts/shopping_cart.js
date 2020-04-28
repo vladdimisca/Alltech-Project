@@ -41,13 +41,35 @@ function getCart(email) {
 
                 let br = document.createElement('br');
 
+                let div = document.createElement('div');
+
                 let para = document.createElement('p');
                 para.innerHTML = "x" + item.number;
                 para.id = "para";
 
+                div.appendChild(para);
+
+                let divbtn = document.createElement('div');
+                divbtn.setAttribute('class', 'qty');
+
+                let span = document.createElement('span');
+                span.setAttribute('class', 'minus bg-dark');
+                span.innerText = "-";
+
+                divbtn.appendChild(span);
+
+                let span2 = document.createElement('span');
+                span2.setAttribute('class', 'plus bg-dark');
+                span2.innerText = "+";
+
+                divbtn.appendChild(span2);
+
+                div.appendChild(divbtn);
+
                 let close = document.createElement('i');
                 close.className = "fa fa-close";
                 close.style = "font-size:20px;color:red;";
+
                 close.onclick = () => deleteItemFromCart(email, item.productId, item.number, archive, br);
 
                 close.onmouseover = function () { close.style = "font-size:20px;color:blue;cursor:pointer" };
@@ -59,7 +81,7 @@ function getCart(email) {
                 image.alt = "Not available";
 
                 article.appendChild(image);
-                article.appendChild(para);
+                article.appendChild(div);
                 article.appendChild(close);
 
                 container.appendChild(archive);

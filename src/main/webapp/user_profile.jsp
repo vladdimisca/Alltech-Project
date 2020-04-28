@@ -55,7 +55,7 @@
     <div id="logged"> </div>
     <hr>
 
-    <h3>Actions</h3>
+    <h3 id="messageFail">Actions</h3>
 
     <button class="button" onclick="logout()">Logout</button>
     <br>

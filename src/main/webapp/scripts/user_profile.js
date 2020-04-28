@@ -77,12 +77,15 @@ window.onload = function () {
                     detailsDiv.appendChild(archiveLast);
                     detailsDiv.appendChild(archiveEmail);
 
-                    changeFirst.onclick = () => changeFirstName(changeFirst, articleFirst, response.firstName);
+                    changeFirst.onclick = () => changeFirstName(changeFirst, articleFirst, response.firstName, email);
+                    changeLast.onclick = () => changeLastName(changeLast, articleLast, response.lastName, email);
+                    changeEmail.onclick = () => changeEm(changeEmail, articleEmail, email);
                 }
             };
 
             xHttpProfile.open("GET", "user_account?email=" + email, true);
             xHttpProfile.send();
+
         }
 };
 
@@ -105,8 +108,10 @@ function changePassword() {
     location.replace("change_password.jsp");
 }
 
-function changeFirstName(changeFirst, articleFirst, textName) {
+function changeFirstName(changeFirst, articleFirst, textName, email) {
     changeFirst.onclick = null;
+
+    const xHttpUpdate = new XMLHttpRequest();
 
     let text = articleFirst.firstChild;
     let button = articleFirst.childNodes[1];
@@ -126,7 +131,6 @@ function changeFirstName(changeFirst, articleFirst, textName) {
     articleFirst.insertBefore(firstName, button);
     articleFirst.insertBefore(input, button);
 
-
     changeFirst.onclick = function() {
         let text = input.value;
 
@@ -141,8 +145,120 @@ function changeFirstName(changeFirst, articleFirst, textName) {
 
         articleFirst.insertBefore(newFirstName, button);
 
-        changeFirst.onclick = () => changeFirstName(changeFirst, articleFirst, text);
-    }
+        xHttpUpdate.open("POST", "user_account?type=" + "2" + "&email=" + email + "&firstName=" + text, true);
+        xHttpUpdate.send();
 
+        changeFirst.onclick = () => changeFirstName(changeFirst, articleFirst, text);
+    };
+}
+
+
+function changeLastName(changeLast, articleLast, textName, email) {
+    changeLast.onclick = null;
+
+    const xHttpUpdate = new XMLHttpRequest();
+
+    let text = articleLast.firstChild;
+    let button = articleLast.childNodes[1];
+    articleLast.removeChild(text);
+
+    let lastName = document.createElement('h4');
+    lastName.innerText = "Last name:"
+
+    let input = document.createElement('input');
+    input.value = textName;
+    input.style.marginTop = "3px";
+    input.style.marginLeft = "5px";
+    input.style.fontSize = "larger";
+
+    button.innerText = "Submit";
+
+    articleLast.insertBefore(lastName, button);
+    articleLast.insertBefore(input, button);
+
+    changeLast.onclick = function() {
+        let text = input.value;
+
+        articleLast.removeChild(lastName);
+        articleLast.removeChild(input);
+
+        let newLastName = document.createElement('h4');
+
+        newLastName.innerText = 'Last name: ' + text;
+
+        button.innerText = "Change";
+
+        articleLast.insertBefore(newLastName, button);
+
+        xHttpUpdate.open("POST", "user_account?type=" + "3" + "&email=" + email + "&lastName=" + text, true);
+        xHttpUpdate.send();
+
+        changeLast.onclick = () => changeLastName(changeLast, articleLast, text);
+    };
+}
+
+
+function changeEm (changeEmail, articleEmail, oldEmail) {
+    changeEmail.onclick = null;
+
+    const xHttpUpdate = new XMLHttpRequest();
+
+    let text = articleEmail.firstChild;
+    let button = articleEmail.childNodes[1];
+    articleEmail.removeChild(text);
+
+    let email = document.createElement('h4');
+    email.innerText = "Email:"
+
+    let input = document.createElement('input');
+    input.value = oldEmail;
+    input.style.marginTop = "3px";
+    input.style.marginLeft = "5px";
+    input.style.fontSize = "larger";
+
+    button.innerText = "Submit";
+
+    articleEmail.insertBefore(email, button);
+    articleEmail.insertBefore(input, button);
+
+    changeEmail.onclick = function() {
+        let text = input.value;
+
+        xHttpUpdate.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                const response = JSON.parse(this.response);
+
+                if (response.hasOwnProperty('success')) {
+                    if (document.getElementById('message')) {
+                        let message = document.getElementById('message');
+                        message.parentNode.removeChild(message);
+                    }
+                    articleEmail.removeChild(email);
+                    articleEmail.removeChild(input);
+
+                    let newEmail = document.createElement('h4');
+
+                    newEmail.innerText = 'Email: ' + text;
+
+                    button.innerText = "Change";
+
+                    articleEmail.insertBefore(newEmail, button);
+
+                    changeEmail.onclick = () => changeEm(changeEmail, articleEmail, text);
+                } else {
+                    if (!document.getElementById('message')) {
+                        let detailsDiv = document.getElementById('logged');
+                        let message = document.createElement("h5");
+                        message.setAttribute('id', 'message');
+                        message.innerText = response.failure;
+                        detailsDiv.appendChild(message);
+                    }
+                }
+            }
+        };
+
+        xHttpUpdate.open("POST", "user_account?type=" + "4" + "&email=" + oldEmail + "&newEmail=" + text, true);
+        xHttpUpdate.send();
+    };
 }
 
