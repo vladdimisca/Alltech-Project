@@ -26,6 +26,10 @@ public class ProductService {
         return productRepository.getNumberById(id);
     }
 
+    public String getLinkById(Integer id) throws  ProductNotFoundException {
+        return productRepository.getLinkById(id);
+    }
+
     public void decreaseNumberById(Integer id) throws ProductNotFoundException {
         productRepository.decreaseNumberById(id);
     }

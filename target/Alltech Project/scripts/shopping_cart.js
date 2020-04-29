@@ -77,12 +77,16 @@ function getCart(email) {
                 close.onmouseover = function () { close.style = "font-size:20px;color:blue;cursor:pointer" };
                 close.onmouseout = function () { close.style = "font-size:20px;color:red;"; }
 
-                let image = document.createElement('img');
+                let anchor = document.createElement('a');
+                anchor.href = item.link;
 
+                let image = document.createElement('img');
                 image.src = item.source;
                 image.alt = "Not available";
 
-                article.appendChild(image);
+                anchor.appendChild(image);
+
+                article.appendChild(anchor);
                 article.appendChild(div);
                 article.appendChild(close);
 

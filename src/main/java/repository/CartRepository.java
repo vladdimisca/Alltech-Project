@@ -144,7 +144,9 @@ public class CartRepository {
 
                 String src = productService.getSourceById(productId);
                 Integer price = productService.getPriceById(productId);
-                Product item = new Product(productId, number, src, price);
+                String link = productService.getLinkById(productId);
+
+                Product item = new Product(productId, number, src, link, price);
                 cart.add(item);
             }
 
