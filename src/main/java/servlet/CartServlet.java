@@ -32,6 +32,7 @@ public class CartServlet extends HttpServlet {
 
             json.put("productId", item.getProductId());
             json.put("source", item.getSource());
+            json.put("link", item.getLink());
             json.put("number", item.getNumber());
 
             jsonArray.add(json);
