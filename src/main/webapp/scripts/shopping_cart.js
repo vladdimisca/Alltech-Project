@@ -53,12 +53,14 @@ function getCart(email) {
                 divbtn.setAttribute('class', 'qty');
 
                 let span = document.createElement('span');
+                span.onclick = () => decreaseByOne(email, item.productId, para);
                 span.setAttribute('class', 'minus bg-dark');
                 span.innerText = "-";
 
                 divbtn.appendChild(span);
 
                 let span2 = document.createElement('span');
+                span2.onclick = () => increaseByOne(email, item.productId, para);
                 span2.setAttribute('class', 'plus bg-dark');
                 span2.innerText = "+";
 
@@ -94,7 +96,41 @@ function getCart(email) {
     xHttpCart.send();
 }
 
-function deleteItemFromCart(email, productId, number, div, br) {
+function increaseByOne(email, productId, paragraph) {
+    const xHttpAdd = new XMLHttpRequest();
+
+    xHttpAdd.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            const response = JSON.parse(this.response);
+
+            if(response.hasOwnProperty('success')) {
+                paragraph.innerHTML = "x" + response.number;
+            }
+        }
+    };
+
+    xHttpAdd.open("POST", "shopping_cart?email=" + email + "&productId=" + productId, true);
+    xHttpAdd.send();
+}
+
+function decreaseByOne(email, productId, paragraph) {
+    const xHttpDecrease = new XMLHttpRequest();
+
+    xHttpDecrease.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            const response = JSON.parse(this.response);
+
+            if(response.hasOwnProperty('success')) {
+                paragraph.innerHTML = "x" + response.number;
+            }
+        }
+    };
+
+    xHttpDecrease.open("DELETE", "shopping_cart?type=2&email=" + email + "&productId=" + productId, true);
+    xHttpDecrease.send();
+}
+
+function deleteItemFromCart(email, productId,div, br) {
     const xHttpDelete = new XMLHttpRequest();
 
     xHttpDelete.onreadystatechange = function () {
@@ -108,7 +144,7 @@ function deleteItemFromCart(email, productId, number, div, br) {
         }
     }
 
-    xHttpDelete.open("DELETE","shopping_cart?email=" + email + "&productId=" + productId + "&number=" + number , true);
+    xHttpDelete.open("DELETE","shopping_cart?type=1&email=" + email + "&productId=" + productId, true);
     xHttpDelete.send();
 
     window.location.replace("shopping_cart.jsp");

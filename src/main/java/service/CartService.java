@@ -37,7 +37,15 @@ public class CartService {
         cartRepository.removeCartItem(email, productId);
     }
 
+    public Integer getProductNumberByEmail(String email, Integer productId) {
+        return cartRepository.getProductNumberByEmail(email, productId);
+    }
+
     public void updateEmail(String oldEmail, String newEmail) {
         cartRepository.updateEmail(oldEmail, newEmail);
+    }
+
+    public void decreaseNumberByEmail(String email, Integer productId) {
+        cartRepository.decreaseNumberByEmail(email, productId);
     }
 }

@@ -1,15 +1,12 @@
 package servlet;
 
-import exceptions.EmailNotFoundException;
 import exceptions.ExistingUserException;
 import exceptions.WrongPasswordException;
 import model.User;
 import org.json.simple.JSONObject;
-import service.AuthenticationService;
 import service.CartService;
 import service.UserService;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,11 +38,10 @@ public class AccountServlet extends HttpServlet {
         JSONObject json = new JSONObject();
 
         try {
-            AuthenticationService.getInstance().login(email, password);
-            UserService.getInstance().removeUserByEmail(email);
+            UserService.getInstance().removeUserByEmail(email, password);
 
             json.put("success", "success");
-        } catch (EmailNotFoundException | WrongPasswordException e) {
+        } catch (WrongPasswordException e) {
             json.put("failure", e.getMessage());
             e.printStackTrace();
         }
@@ -55,7 +51,7 @@ public class AccountServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Integer type = Integer.parseInt(req.getParameter("type"));
+        int type = Integer.parseInt(req.getParameter("type"));
         String email = req.getParameter("email");
 
         JSONObject json = new JSONObject();
@@ -105,7 +101,8 @@ public class AccountServlet extends HttpServlet {
                     e.printStackTrace();
                 }
                 break;
-
+            default:
+                System.out.println("There is a problem with the given type of update!");
         }
 
         resp.getWriter().write(String.valueOf(json));

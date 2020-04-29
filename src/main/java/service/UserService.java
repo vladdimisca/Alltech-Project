@@ -1,6 +1,7 @@
 package service;
 
 import exceptions.ExistingUserException;
+import exceptions.ProductNotFoundException;
 import exceptions.WrongPasswordException;
 import model.User;
 import repository.UserRepository;
@@ -23,7 +24,18 @@ public class UserService {
         return userRepository.getUserByEmail(email);
     }
 
-    public void removeUserByEmail(String email) {
+    public void removeUserByEmail(String email, String password) throws WrongPasswordException{
+        String decryptedPassword = EncryptionService.getInstance().decrypt(getUserByEmail(email).getPassword());
+
+        if(!decryptedPassword.equals(password))
+            throw new WrongPasswordException("The password for this user is wrong!");
+
+        try {
+            ProductService.getInstance().restoreCartItemsByEmail(email);
+        } catch (ProductNotFoundException e) {
+            e.printStackTrace();
+        }
+
         userRepository.removeUserByEmail(email);
     }
 
@@ -36,7 +48,6 @@ public class UserService {
             throw new WrongPasswordException("The password for this user is wrong!");
 
         userRepository.changePassword(email, newPassword);
-
     }
 
     public void changeFirstName (String email, String newName) {

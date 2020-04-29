@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}register.css">
-    <script src="scripts/update_profile.js"></script>
+    <script src="scripts/update_password.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
@@ -29,7 +29,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a href="register.jsp" class="nav-link">Account</a>
+                <a href="user_profile.jsp" class="nav-link">Account</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">

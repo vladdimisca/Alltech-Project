@@ -64,7 +64,11 @@ class AuthenticationServiceTest {
     @Test
     @Order(4)
     void removeUserTest() {
-        userService.removeUserByEmail(randomEmail);
+        try {
+            userService.removeUserByEmail(randomEmail, randomPassword);
+        } catch (WrongPasswordException e) {
+            e.printStackTrace();
+        }
 
         boolean result = userService.getUserByEmail(randomEmail) == null;
 

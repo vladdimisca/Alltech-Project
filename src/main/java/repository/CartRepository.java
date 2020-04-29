@@ -179,5 +179,37 @@ public class CartRepository {
             e.printStackTrace();
         }
     }
+
+    public void decreaseNumberByEmail(String email, Integer productId) {
+        int productNumber = getProductNumberByEmail(email, productId);
+
+        if(productNumber > 1) {
+            productNumber--;
+
+            String sqlUpdate = "" +
+                    "UPDATE CART " +
+                    "SET NUMBER = ? " +
+                    "WHERE EMAIL = ? AND PRODUCT_ID = ?";
+
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection dbConnection = DriverManager.getConnection(url, username, password);
+                PreparedStatement statement = dbConnection.prepareStatement(sqlUpdate);
+
+                statement.setInt(1, productNumber);
+                statement.setString(2, email);
+                statement.setInt(3, productId);
+
+                statement.executeUpdate();
+
+                ProductService.getInstance().restoreStock(productId, 1);
+
+                statement.close();
+                dbConnection.close();
+            } catch (SQLException | ClassNotFoundException | ProductNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
 

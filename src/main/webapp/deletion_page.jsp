@@ -29,7 +29,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="register.jsp" class="nav-link">Account</a>
+                    <a href="user_profile.jsp" class="nav-link">Account</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -40,17 +40,17 @@
         </div>
     </nav>
 
-    <form name="deletionForm" method="post" action="deletion_page" id="deletionForm">
+    <form name="deletionForm" method="post" action="user_account" id="deletionForm">
         <div class="container">
 
             <h2 class="center">Confirm account deletion</h2>
             <hr>
 
-            <label id="email"><b> &nbsp;Email: &nbsp; </b></label>
+            <label id="email"><b>Email: </b></label>
             <br>
             <br>
 
-            <label for="psw" ><b> &nbsp;Password</b></label>
+            <label for="psw" ><b>Password </b></label>
             <input type="password" placeholder="Confirm Password" name="psw" id="psw" required>
 
             <hr>
