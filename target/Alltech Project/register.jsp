@@ -47,10 +47,10 @@
                 <hr>
 
                 <label for="firstName" class="required"><b>First Name</b></label>
-                <input pattern="[a-zA-Z]+" type="text" placeholder="Enter First Name" name="firstName" id="firstName" required title="Alphabets only">
+                <input pattern="[a-zA-Z -]+" type="text" placeholder="Enter First Name" name="firstName" id="firstName" required title="Alphabets only">
 
                 <label for="lastName" class="required"><b>Last Name</b></label>
-                <input pattern="[a-zA-Z]+" type="text" placeholder="Enter Last Name" name="lastName" id="lastName" required title="Alphabets only">
+                <input pattern="[a-zA-Z -]+" type="text" placeholder="Enter Last Name" name="lastName" id="lastName" required title="Alphabets only">
 
                 <label for="email" class="required"><b>Email</b></label>
                 <input type="text" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"

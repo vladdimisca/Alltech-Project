@@ -1,92 +1,80 @@
 
 window.onload = function () {
-    let logged = JSON.parse(localStorage.getItem('logged'));
+    let email = localStorage.getItem('email');
+    const xHttpProfile = new XMLHttpRequest();
 
-    if(logged)
-        if(logged === 1) {
-            let targetLink = document.querySelectorAll('nav a')[5];
+    xHttpProfile.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            const response = JSON.parse(this.response);
 
-            if(targetLink) {
-                targetLink.setAttribute("href", "user_profile.jsp");
-            }
+            let archiveFirst = document.createElement('div');
+            archiveFirst.setAttribute ('class', 'archive');
 
-            let email = localStorage.getItem('email');
-            const xHttpProfile = new XMLHttpRequest();
+            let articleFirst = document.createElement('div');
+            articleFirst.setAttribute('class', 'article');
 
-            xHttpProfile.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    const response = JSON.parse(this.response);
+            archiveFirst.appendChild(articleFirst);
 
-                    let archiveFirst = document.createElement('div');
-                    archiveFirst.setAttribute ('class', 'archive');
+            let archiveLast = document.createElement('div');
+            archiveLast.setAttribute ('class', 'archive');
 
-                    let articleFirst = document.createElement('div');
-                    articleFirst.setAttribute('class', 'article');
+            let articleLast = document.createElement('div');
+            articleLast.setAttribute('class', 'article');
 
-                    archiveFirst.appendChild(articleFirst);
+            archiveLast.appendChild(articleLast);
 
-                    let archiveLast = document.createElement('div');
-                    archiveLast.setAttribute ('class', 'archive');
+            let archiveEmail = document.createElement('div');
+            archiveEmail.setAttribute ('class', 'archive');
 
-                    let articleLast = document.createElement('div');
-                    articleLast.setAttribute('class', 'article');
+            let articleEmail = document.createElement('div');
+            articleEmail.setAttribute('class', 'article');
 
-                    archiveLast.appendChild(articleLast);
-
-                    let archiveEmail = document.createElement('div');
-                    archiveEmail.setAttribute ('class', 'archive');
-
-                    let articleEmail = document.createElement('div');
-                    articleEmail.setAttribute('class', 'article');
-
-                    archiveEmail.appendChild(articleEmail);
+            archiveEmail.appendChild(articleEmail);
 
 
-                    let firstName = document.createElement("h4");
-                    let changeFirst = document.createElement("button");
-                    let lastName = document.createElement("h4");
-                    let changeLast = document.createElement("button");
-                    let em = document.createElement("h4");
-                    let changeEmail = document.createElement("button");
+            let firstName = document.createElement("h4");
+            let changeFirst = document.createElement("button");
+            let lastName = document.createElement("h4");
+            let changeLast = document.createElement("button");
+            let em = document.createElement("h4");
+            let changeEmail = document.createElement("button");
 
-                    changeFirst.setAttribute('class', 'button2');
-                    changeFirst.innerText = "Change";
+            changeFirst.setAttribute('class', 'button2');
+            changeFirst.innerText = "Change";
 
-                    changeLast.setAttribute('class', 'button2');
-                    changeLast.innerText = "Change";
+            changeLast.setAttribute('class', 'button2');
+            changeLast.innerText = "Change";
 
-                    changeEmail.setAttribute('class', 'button2');
-                    changeEmail.innerText = "Change";
+            changeEmail.setAttribute('class', 'button2');
+            changeEmail.innerText = "Change";
 
 
-                    firstName.innerText = 'First Name: ' + response.firstName;
-                    lastName.innerText = 'Last Name: ' + response.lastName;
-                    em.innerText = 'Email: ' + response.email;
+            firstName.innerText = 'First Name: ' + response.firstName;
+            lastName.innerText = 'Last Name: ' + response.lastName;
+            em.innerText = 'Email: ' + response.email;
 
-                    articleFirst.appendChild(firstName);
-                    articleFirst.appendChild(changeFirst);
+            articleFirst.appendChild(firstName);
+            articleFirst.appendChild(changeFirst);
 
-                    articleLast.appendChild(lastName);
-                    articleLast.appendChild(changeLast)
+            articleLast.appendChild(lastName);
+            articleLast.appendChild(changeLast)
 
-                    articleEmail.appendChild(em);
-                    articleEmail.appendChild(changeEmail)
+            articleEmail.appendChild(em);
+            articleEmail.appendChild(changeEmail)
 
-                    let detailsDiv = document.getElementById('logged');
-                    detailsDiv.appendChild(archiveFirst);
-                    detailsDiv.appendChild(archiveLast);
-                    detailsDiv.appendChild(archiveEmail);
+            let detailsDiv = document.getElementById('logged');
+            detailsDiv.appendChild(archiveFirst);
+            detailsDiv.appendChild(archiveLast);
+            detailsDiv.appendChild(archiveEmail);
 
-                    changeFirst.onclick = () => changeFirstName(changeFirst, articleFirst, response.firstName, email);
-                    changeLast.onclick = () => changeLastName(changeLast, articleLast, response.lastName, email);
-                    changeEmail.onclick = () => changeEm(changeEmail, articleEmail, email);
-                }
-            };
-
-            xHttpProfile.open("GET", "user_account?email=" + email, true);
-            xHttpProfile.send();
-
+            changeFirst.onclick = () => changeFirstName(changeFirst, articleFirst, response.firstName, email);
+            changeLast.onclick = () => changeLastName(changeLast, articleLast, response.lastName, email);
+            changeEmail.onclick = () => changeEm(changeEmail, articleEmail, email);
         }
+    };
+
+    xHttpProfile.open("GET", "user_account?email=" + email, true);
+    xHttpProfile.send();
 };
 
 function login(email) {
@@ -118,7 +106,7 @@ function changeFirstName(changeFirst, articleFirst, textName, email) {
     articleFirst.removeChild(text);
 
     let firstName = document.createElement('h4');
-    firstName.innerText = "First name:"
+    firstName.innerText = "First Name:"
 
     let input = document.createElement('input');
     input.value = textName;
@@ -134,21 +122,35 @@ function changeFirstName(changeFirst, articleFirst, textName, email) {
     changeFirst.onclick = function() {
         let text = input.value;
 
-        articleFirst.removeChild(firstName);
-        articleFirst.removeChild(input);
+        if(!(/^[A-Za-z -]+$/.test(text))) {
+            alert("Match the required format for name!");
+        }
+        else {
+            xHttpUpdate.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    const response = JSON.parse(this.response);
 
-        let newFirstName = document.createElement('h4');
+                    if (response.hasOwnProperty('success')) {
 
-        newFirstName.innerText = 'First name: ' + text;
+                        articleFirst.removeChild(firstName);
+                        articleFirst.removeChild(input);
 
-        button.innerText = "Change";
+                        let newFirstName = document.createElement('h4');
 
-        articleFirst.insertBefore(newFirstName, button);
+                        newFirstName.innerText = 'First Name: ' + text;
 
-        xHttpUpdate.open("POST", "user_account?type=" + "2" + "&email=" + email + "&firstName=" + text, true);
-        xHttpUpdate.send();
+                        button.innerText = "Change";
 
-        changeFirst.onclick = () => changeFirstName(changeFirst, articleFirst, text);
+                        articleFirst.insertBefore(newFirstName, button);
+                    }
+                }
+            };
+
+            xHttpUpdate.open("POST", "user_account?type=" + "2" + "&email=" + email + "&firstName=" + text, true);
+            xHttpUpdate.send();
+
+            changeFirst.onclick = () => changeFirstName(changeFirst, articleFirst, text);
+        }
     };
 }
 
@@ -163,7 +165,7 @@ function changeLastName(changeLast, articleLast, textName, email) {
     articleLast.removeChild(text);
 
     let lastName = document.createElement('h4');
-    lastName.innerText = "Last name:"
+    lastName.innerText = "Last Name:"
 
     let input = document.createElement('input');
     input.value = textName;
@@ -179,21 +181,35 @@ function changeLastName(changeLast, articleLast, textName, email) {
     changeLast.onclick = function() {
         let text = input.value;
 
-        articleLast.removeChild(lastName);
-        articleLast.removeChild(input);
+        if(!(/^[A-Za-z -]+$/.test(text))) {
+            alert("Match the required format for name!");
+        }
+        else {
+            xHttpUpdate.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    const response = JSON.parse(this.response);
 
-        let newLastName = document.createElement('h4');
+                    if (response.hasOwnProperty('success')) {
 
-        newLastName.innerText = 'Last name: ' + text;
+                        articleLast.removeChild(lastName);
+                        articleLast.removeChild(input);
 
-        button.innerText = "Change";
+                        let newLastName = document.createElement('h4');
 
-        articleLast.insertBefore(newLastName, button);
+                        newLastName.innerText = 'Last Name: ' + text;
 
-        xHttpUpdate.open("POST", "user_account?type=" + "3" + "&email=" + email + "&lastName=" + text, true);
-        xHttpUpdate.send();
+                        button.innerText = "Change";
 
-        changeLast.onclick = () => changeLastName(changeLast, articleLast, text);
+                        articleLast.insertBefore(newLastName, button);
+                    }
+                }
+            };
+
+            xHttpUpdate.open("POST", "user_account?type=" + "3" + "&email=" + email + "&lastName=" + text, true);
+            xHttpUpdate.send();
+
+            changeLast.onclick = () => changeLastName(changeLast, articleLast, text);
+        }
     };
 }
 
@@ -215,7 +231,6 @@ function changeEm (changeEmail, articleEmail, oldEmail) {
     input.style.marginTop = "3px";
     input.style.marginLeft = "5px";
     input.style.fontSize = "larger";
-    input.pattern = "^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";
     input.required = true;
 
     button.innerText = "Submit";
@@ -228,60 +243,63 @@ function changeEm (changeEmail, articleEmail, oldEmail) {
 
         localStorage.setItem("email", text);
 
-        xHttpUpdate.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                const response = JSON.parse(this.response);
+        if(!(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/.test(text))) {
+            alert("Match the required format for email!");
+        }
+        else {
+            xHttpUpdate.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    const response = JSON.parse(this.response);
 
-                if (text === oldEmail) {
-                    if (document.getElementById('message')) {
-                        let message = document.getElementById('message');
-                        message.parentNode.removeChild(message);
+                    if (text === oldEmail) {
+                        if (document.getElementById('message')) {
+                            let message = document.getElementById('message');
+                            message.parentNode.removeChild(message);
+                        }
+                        articleEmail.removeChild(email);
+                        articleEmail.removeChild(input);
+
+                        let newEmail = document.createElement('h4');
+
+                        newEmail.innerText = 'Email: ' + text;
+
+                        button.innerText = "Change";
+
+                        articleEmail.insertBefore(newEmail, button);
+
+                        changeEmail.onclick = () => changeEm(changeEmail, articleEmail, text);
+                    } else if (response.hasOwnProperty('success')) {
+                        if (document.getElementById('message')) {
+                            let message = document.getElementById('message');
+                            message.parentNode.removeChild(message);
+                        }
+                        articleEmail.removeChild(email);
+                        articleEmail.removeChild(input);
+
+                        let newEmail = document.createElement('h4');
+
+                        newEmail.innerText = 'Email: ' + text;
+
+                        button.innerText = "Change";
+
+                        articleEmail.insertBefore(newEmail, button);
+
+                        changeEmail.onclick = () => changeEm(changeEmail, articleEmail, text);
+                    } else {
+                        if (!document.getElementById('message')) {
+                            let detailsDiv = document.getElementById('logged');
+                            let message = document.createElement("h5");
+                            message.setAttribute('id', 'message');
+                            message.innerText = response.failure;
+                            detailsDiv.appendChild(message);
+                        }
                     }
-                    articleEmail.removeChild(email);
-                    articleEmail.removeChild(input);
-
-                    let newEmail = document.createElement('h4');
-
-                    newEmail.innerText = 'Email: ' + text;
-
-                    button.innerText = "Change";
-
-                    articleEmail.insertBefore(newEmail, button);
-
-                    changeEmail.onclick = () => changeEm(changeEmail, articleEmail, text);
                 }
-                else
-                if(response.hasOwnProperty('success')) {
-                    if (document.getElementById('message')) {
-                        let message = document.getElementById('message');
-                        message.parentNode.removeChild(message);
-                    }
-                    articleEmail.removeChild(email);
-                    articleEmail.removeChild(input);
+            };
 
-                    let newEmail = document.createElement('h4');
-
-                    newEmail.innerText = 'Email: ' + text;
-
-                    button.innerText = "Change";
-
-                    articleEmail.insertBefore(newEmail, button);
-
-                    changeEmail.onclick = () => changeEm(changeEmail, articleEmail, text);
-                } else {
-                    if (!document.getElementById('message')) {
-                        let detailsDiv = document.getElementById('logged');
-                        let message = document.createElement("h5");
-                        message.setAttribute('id', 'message');
-                        message.innerText = response.failure;
-                        detailsDiv.appendChild(message);
-                    }
-                }
-            }
-        };
-
-        xHttpUpdate.open("POST", "user_account?type=" + "4" + "&email=" + oldEmail + "&newEmail=" + text, true);
-        xHttpUpdate.send();
+            xHttpUpdate.open("POST", "user_account?type=" + "4" + "&email=" + oldEmail + "&newEmail=" + text, true);
+            xHttpUpdate.send();
+        }
     };
 }
 

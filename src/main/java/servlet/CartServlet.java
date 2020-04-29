@@ -50,8 +50,10 @@ public class CartServlet extends HttpServlet {
 
         try {
              CartService.getInstance().addCartItem(item);
+             int productNumber = CartService.getInstance().getProductNumberByEmail(email, productId);
 
              json.put("success", "Added to cart");
+             json.put("number", productNumber);
         } catch(OutOfStockException e) {
             json.put("failure", "Out of stock");
             e.printStackTrace();
@@ -65,22 +67,30 @@ public class CartServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int type = Integer.parseInt(req.getParameter("type"));
         String email = req.getParameter("email");
         Integer productId = Integer.parseInt(req.getParameter("productId"));
-        Integer productNumber = Integer.parseInt(req.getParameter("number"));
 
         JSONObject json = new JSONObject();
 
-        try {
-            CartService.getInstance().removeCartItem(email, productId);
+        if(type == 1) {
+            try {
+                int productNumber = CartService.getInstance().getProductNumberByEmail(email, productId);
+                CartService.getInstance().removeCartItem(email, productId);
 
-            json.put("success", "Item deleted from cart");
+                json.put("success", "Item deleted from cart");
 
-            ProductService.getInstance().restoreStock(productId, productNumber);
-        }
-        catch (ProductNotFoundException e) {
-            json.put("failure", "Product couldn't be restored due to some technical issues");
-            e.printStackTrace();
+                ProductService.getInstance().restoreStock(productId, productNumber);
+            } catch (ProductNotFoundException e) {
+                json.put("failure", "Product couldn't be restored due to some technical issues");
+                e.printStackTrace();
+            }
+        } else {
+            CartService.getInstance().decreaseNumberByEmail(email, productId);
+            int productNumber = CartService.getInstance().getProductNumberByEmail(email, productId);
+
+            json.put("success", "Updated");
+            json.put("number", productNumber);
         }
 
         resp.getWriter().write(String.valueOf(json));

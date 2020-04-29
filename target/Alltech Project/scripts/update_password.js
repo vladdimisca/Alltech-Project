@@ -1,25 +1,12 @@
+
 window.onload = function () {
-    let logged = JSON.parse(localStorage.getItem('logged'));
+    let email = localStorage.getItem('email');
+    let changePass = document.getElementById('changeForm');
 
-    if(logged)
-        if(logged === 1) {
-            let targetLink = document.querySelectorAll('nav a')[5];
-
-            if(targetLink) {
-                targetLink.setAttribute("href", "user_profile.jsp");
-            }
-
-            let email = localStorage.getItem('email');
-
-            let changePass = document.getElementById('changeForm')
-
-            if(changePass){
-                changePass.onsubmit = (event) => updatePassword(event, email);
-            }
-
-        }
+    if(changePass){
+        changePass.onsubmit = (event) => updatePassword(event, email);
+    }
 }
-
 
 function updatePassword (event, email) {
     event.preventDefault()
@@ -27,9 +14,6 @@ function updatePassword (event, email) {
     let newPassword = document.querySelector('input[id=newpsw]');
 
     const xHttpUpdate = new XMLHttpRequest();
-
-    console.log(oldPassword.value);
-    console.log(newPassword.value);
 
     xHttpUpdate.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
