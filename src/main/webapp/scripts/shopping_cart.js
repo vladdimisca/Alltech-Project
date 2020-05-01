@@ -26,7 +26,6 @@ function getCart(email) {
             let paragraph = document.getElementById('cartMessage');
             paragraph.innerText = 'Your cart is empty.';
 
-
             response.forEach(function (item) {
                 if (paragraph)
                     paragraph.style.display = "none";
@@ -93,6 +92,15 @@ function getCart(email) {
                 container.appendChild(archive);
                 container.appendChild(br);
             });
+
+            if(paragraph.style.display === 'none') {
+                let hr = document.createElement('hr');
+
+                let priceP = getTotalPrice(email);
+
+                container.appendChild(hr);
+                container.appendChild(priceP);
+            }
         }
     };
 
@@ -115,6 +123,8 @@ function increaseByOne(email, productId, paragraph) {
 
     xHttpAdd.open("POST", "shopping_cart?email=" + email + "&productId=" + productId, true);
     xHttpAdd.send();
+
+    window.location.replace("shopping_cart.jsp");
 }
 
 function decreaseByOne(email, productId, paragraph) {
@@ -132,6 +142,8 @@ function decreaseByOne(email, productId, paragraph) {
 
     xHttpDecrease.open("DELETE", "shopping_cart?type=2&email=" + email + "&productId=" + productId, true);
     xHttpDecrease.send();
+
+    window.location.replace("shopping_cart.jsp");
 }
 
 function deleteItemFromCart(email, productId,div, br) {
@@ -152,4 +164,24 @@ function deleteItemFromCart(email, productId,div, br) {
     xHttpDelete.send();
 
     window.location.replace("shopping_cart.jsp");
+}
+
+function getTotalPrice(email) {
+    const xHttpPrice = new XMLHttpRequest();
+
+    let totalPrice = document.createElement('p');
+
+    xHttpPrice.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            const response = JSON.parse(this.response);
+
+
+            totalPrice.innerHTML = "Total price: $" + response['totalPrice'];
+        }
+    }
+
+    xHttpPrice.open("PUT", "shopping_cart?email=" + email, true);
+    xHttpPrice.send();
+
+    return totalPrice;
 }

@@ -96,4 +96,17 @@ public class CartServlet extends HttpServlet {
 
         resp.getWriter().write(String.valueOf(json));
     }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String email = req.getParameter("email");
+
+        Integer totalPrice = CartService.getInstance().getTotalPriceByEmail(email);
+
+        JSONObject json = new JSONObject();
+
+        json.put("totalPrice", totalPrice.toString());
+
+        resp.getWriter().write(String.valueOf(json));
+    }
 }

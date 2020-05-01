@@ -48,4 +48,16 @@ public class CartService {
     public void decreaseNumberByEmail(String email, Integer productId) {
         cartRepository.decreaseNumberByEmail(email, productId);
     }
+
+    public Integer getTotalPriceByEmail(String email) {
+        ArrayList<Product> cart = getCartByEmail(email);
+
+        int sum = 0;
+
+        for(Product item : cart) {
+            sum += item.getPrice() * item.getNumber();
+        }
+
+        return sum;
+    }
 }
