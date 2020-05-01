@@ -20,10 +20,13 @@ public class UserRepository {
     public void addUser(User user) {
         String sqlInsert = "INSERT INTO USERS (FIRST_NAME, LAST_NAME, EMAIL, PASSWORD) VALUES (?, ?, ?, ?)";
 
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection dbConnection = DriverManager.getConnection(url, username, password);
-            PreparedStatement statement = dbConnection.prepareStatement(sqlInsert);
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlInsert);
 
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
@@ -31,11 +34,18 @@ public class UserRepository {
             statement.setString(4, user.getPassword());
 
             statement.executeUpdate();
-
-            statement.close();
-            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -49,12 +59,15 @@ public class UserRepository {
                 "FROM USERS " +
                 "WHERE EMAIL = ?";
 
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
         User user = null;
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection dbConnection = DriverManager.getConnection(url, username, password);
-            PreparedStatement statement = dbConnection.prepareStatement(sqlSelect);
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlSelect);
 
             statement.setString(1, email);
             ResultSet result = statement.executeQuery();
@@ -67,11 +80,18 @@ public class UserRepository {
 
                 user = new User(firstName, lastName, userEmail, password);
             }
-
-            dbConnection.close();
-            statement.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return user;
@@ -84,18 +104,28 @@ public class UserRepository {
                 "USERS " +
                 "WHERE EMAIL = ?";
 
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection dbConnection = DriverManager.getConnection(url, username, password);
-            PreparedStatement statement = dbConnection.prepareStatement(sqlDelete);
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlDelete);
 
             statement.setString(1, email);
             statement.execute();
-
-            statement.close();
-            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -106,10 +136,13 @@ public class UserRepository {
                 "SET PASSWORD = ? " +
                 "WHERE EMAIL = ?";
 
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection dbConnection = DriverManager.getConnection(url, username, password);
-            PreparedStatement statement = dbConnection.prepareStatement(sqlUpdate);
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlUpdate);
 
             String newPasswordEncrypted = EncryptionService.getInstance().encrypt(newPassword);
 
@@ -117,11 +150,18 @@ public class UserRepository {
             statement.setString(2, email);
 
             statement.executeUpdate();
-
-            statement.close();
-            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -132,20 +172,30 @@ public class UserRepository {
                 "SET FIRST_NAME = ? " +
                 "WHERE EMAIL = ?";
 
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection dbConnection = DriverManager.getConnection(url, username, password);
-            PreparedStatement statement = dbConnection.prepareStatement(sqlUpdate);
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlUpdate);
 
             statement.setString(1, newName);
             statement.setString(2, email);
 
             statement.executeUpdate();
-
-            statement.close();
-            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -156,20 +206,30 @@ public class UserRepository {
                 "SET LAST_NAME = ? " +
                 "WHERE EMAIL = ?";
 
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection dbConnection = DriverManager.getConnection(url, username, password);
-            PreparedStatement statement = dbConnection.prepareStatement(sqlUpdate);
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlUpdate);
 
             statement.setString(1, newName);
             statement.setString(2, email);
 
             statement.executeUpdate();
-
-            statement.close();
-            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -180,20 +240,30 @@ public class UserRepository {
                 "SET EMAIL = ? " +
                 "WHERE EMAIL = ?";
 
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection dbConnection = DriverManager.getConnection(url, username, password);
-            PreparedStatement statement = dbConnection.prepareStatement(sqlUpdate);
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlUpdate);
 
             statement.setString(1, newEmail);
             statement.setString(2, email);
 
             statement.executeUpdate();
-
-            statement.close();
-            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

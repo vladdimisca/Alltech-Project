@@ -21,10 +21,13 @@ public class ProductRepository {
                 "FROM PRODUCTS " +
                 "WHERE PRODUCT_ID = ?";
 
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection dbConnection = DriverManager.getConnection(url, username, password);
-            PreparedStatement statement = dbConnection.prepareStatement(sqlSelect);
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlSelect);
 
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
@@ -32,11 +35,18 @@ public class ProductRepository {
             if(result.next()) {
                 return result.getInt("PRICE");
             }
-
-            statement.close();
-            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         throw new ProductNotFoundException("The product couldn't be found!");
@@ -49,10 +59,13 @@ public class ProductRepository {
                 "FROM PRODUCTS " +
                 "WHERE PRODUCT_ID = ?";
 
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection dbConnection = DriverManager.getConnection(url, username, password);
-            PreparedStatement statement = dbConnection.prepareStatement(sqlSelect);
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlSelect);
 
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
@@ -60,11 +73,18 @@ public class ProductRepository {
             if(result.next()) {
                 return result.getString("SRC");
             }
-
-            statement.close();
-            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         throw new ProductNotFoundException("The product couldn't be found!");
@@ -77,10 +97,13 @@ public class ProductRepository {
                 "FROM PRODUCTS " +
                 "WHERE PRODUCT_ID = ?";
 
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection dbConnection = DriverManager.getConnection(url, username, password);
-            PreparedStatement statement = dbConnection.prepareStatement(sqlSelect);
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlSelect);
 
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
@@ -88,11 +111,18 @@ public class ProductRepository {
             if(result.next()) {
                 return result.getInt("NUMBER");
             }
-
-            statement.close();
-            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         throw new ProductNotFoundException("The product couldn't be found!");
@@ -105,10 +135,13 @@ public class ProductRepository {
                 "FROM PRODUCTS " +
                 "WHERE PRODUCT_ID = ?";
 
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection dbConnection = DriverManager.getConnection(url, username, password);
-            PreparedStatement statement = dbConnection.prepareStatement(sqlSelect);
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlSelect);
 
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
@@ -116,11 +149,18 @@ public class ProductRepository {
             if(result.next()) {
                 return result.getString("LINK");
             }
-
-            statement.close();
-            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         throw new ProductNotFoundException("The product couldn't be found!");
@@ -135,20 +175,30 @@ public class ProductRepository {
                 "SET NUMBER = ? " +
                 "WHERE PRODUCT_ID = ?";
 
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection dbConnection = DriverManager.getConnection(url, username, password);
-            PreparedStatement statement = dbConnection.prepareStatement(sqlUpdate);
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlUpdate);
 
             statement.setInt(1, productNumber);
             statement.setInt(2, id);
 
             statement.executeUpdate();
-
-            statement.close();
-            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -161,20 +211,30 @@ public class ProductRepository {
                 "SET NUMBER = ? " +
                 "WHERE PRODUCT_ID = ?";
 
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection dbConnection = DriverManager.getConnection(url, username, password);
-            PreparedStatement statement = dbConnection.prepareStatement(sqlUpdate);
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlUpdate);
 
             statement.setInt(1, productNumber);
             statement.setInt(2, id);
 
             statement.executeUpdate();
-
-            statement.close();
-            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
