@@ -3,12 +3,12 @@ package service;
 import java.util.Base64;
 
 public class EncryptionService {
-    private static final EncryptionService encryptionServiceinstance = new EncryptionService();
+    private static final EncryptionService encryptionServiceInstance = new EncryptionService();
 
     private EncryptionService() {}
 
     public static EncryptionService getInstance() {
-        return encryptionServiceinstance;
+        return encryptionServiceInstance;
     }
 
     public String encrypt(String str) {

@@ -4,7 +4,6 @@ import model.Comment;
 
 import java.sql.*;
 import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class CommentRepository {
@@ -20,10 +19,13 @@ public class CommentRepository {
     public void addCommentToProductByEmail(String email, Integer productId, Date date, String message) {
         String sqlInsert = "INSERT INTO COMMENTS (EMAIL, PRODUCT_ID, DATE, MESSAGE) VALUES (?, ?, ?, ?)";
 
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection dbConnection = DriverManager.getConnection(url, username, password);
-            PreparedStatement statement = dbConnection.prepareStatement(sqlInsert);
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlInsert);
 
             statement.setString(1, email);
             statement.setInt(2, productId);
@@ -31,11 +33,18 @@ public class CommentRepository {
             statement.setString(4, message);
 
             statement.executeUpdate();
-
-            statement.close();
-            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -50,10 +59,13 @@ public class CommentRepository {
 
         ArrayList<Comment> comments = new ArrayList<>();
 
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection dbConnection = DriverManager.getConnection(url, username, password);
-            PreparedStatement statement = dbConnection.prepareStatement(sqlSelect);
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlSelect);
 
             statement.setInt(1, productId);
             ResultSet result = statement.executeQuery();
@@ -67,11 +79,18 @@ public class CommentRepository {
                 Comment comment = new Comment(email, productId, date, message);
                 comments.add(comment);
             }
-
-            statement.close();
-            dbConnection.close();
         } catch (SQLException | ClassNotFoundException e)   {
             e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return comments;
