@@ -224,12 +224,15 @@ function checkStock(productId) {
 }
 
 function addComment(email, productId) {
-    let p = document.getElementById("message");
+    let p = document.getElementById("message2");
+    let d;
 
     if(p === null) {
         p = document.createElement('p');
 
-        p.setAttribute("id", "message");
+        p.setAttribute("id", "message2");
+
+        d = document.createElement('div');
     }
 
     let today = new Date();
@@ -270,10 +273,39 @@ function addComment(email, productId) {
 
                     p.innerHTML = response.success;
 
-                    let comment = document.createElement('p');
-                    comment.innerHTML = email + " " + dateTime + " " + message.value;
+                    let ul = document.getElementsByClassName('media-list');
 
-                    document.getElementById("commentSection").appendChild(comment);
+                    let li = document.createElement('li');
+                    li.setAttribute('class', 'media');
+
+                    ul[0].appendChild(li);
+
+                    let div2 = document.createElement('div');
+                    div2.setAttribute('class', 'media-body');
+
+                    li.appendChild(div2);
+
+                    let span = document.createElement('span');
+                    span.setAttribute('class', 'text-muted pull-right');
+
+                    div2.appendChild(span);
+
+                    let small = document.createElement('small');
+                    small.setAttribute('class', 'text-muted');
+                    small.innerText = dateTime;
+
+                    span.appendChild(small);
+
+                    let strong = document.createElement('strong');
+                    strong.setAttribute('class', 'text-success ');
+                    strong.innerText = email;
+
+                    div2.appendChild(strong);
+
+                    let comm = document.createElement('p');
+                    comm.innerText = message.value;
+
+                    div2.appendChild(comm);
 
                     message.value = "";
                 }
@@ -286,7 +318,18 @@ function addComment(email, productId) {
 
     let submitButton = document.getElementById('styledInput');
 
-    submitButton.parentNode.insertBefore(p, submitButton);
+    d.appendChild(p);
+
+    submitButton.parentNode.insertBefore(d, submitButton);
+
+    setTimeout(function() {
+
+        d.setAttribute('id', 'messages2--delete2');
+
+        p.addEventListener('transitionend', function() {
+            p.parentNode.removeChild(p);
+        });
+    }, 2000);
 }
 
 function getComments(productId) {
@@ -302,12 +345,40 @@ function getComments(productId) {
                 if(paragraph !== null){
                    paragraph.style.display = 'none';
                 }
+                
+                let ul = document.getElementsByClassName('media-list');
 
-                let p = document.createElement('p');
+                let li = document.createElement('li');
+                li.setAttribute('class', 'media');
 
-                p.innerHTML = comment['email'] + " " + comment['date'] + " " + comment['message'];
+                ul[0].appendChild(li);
 
-                document.getElementById("commentSection").appendChild(p);
+                let div2 = document.createElement('div');
+                div2.setAttribute('class', 'media-body');
+
+                li.appendChild(div2);
+
+                let span = document.createElement('span');
+                span.setAttribute('class', 'text-muted pull-right');
+
+                div2.appendChild(span);
+
+                let small = document.createElement('small');
+                small.setAttribute('class', 'text-muted');
+                small.innerText = comment['date'];
+
+                span.appendChild(small);
+
+                let strong = document.createElement('strong');
+                strong.setAttribute('class', 'text-success ');
+                strong.innerText = comment['email'];
+
+                div2.appendChild(strong);
+
+                let comm = document.createElement('p');
+                comm.innerText = comment['message'];
+
+                div2.appendChild(comm);
             });
         }
     }

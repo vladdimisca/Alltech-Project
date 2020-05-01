@@ -98,8 +98,18 @@ function getCart(email) {
 
                 let priceP = getTotalPrice(email);
 
+                priceP.style.fontSize = "x-large";
+                priceP.style.fontWeight = "bold";
+                priceP.style.float = "right";
+
                 container.appendChild(hr);
                 container.appendChild(priceP);
+
+                let button = document.createElement('button');
+                button.setAttribute('class', 'registerbtn');
+                button.innerText = "Proceed";
+
+                container.appendChild(button);
             }
         }
     };
@@ -174,7 +184,6 @@ function getTotalPrice(email) {
     xHttpPrice.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             const response = JSON.parse(this.response);
-
 
             totalPrice.innerHTML = "Total price: $" + response['totalPrice'];
         }

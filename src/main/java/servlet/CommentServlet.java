@@ -32,7 +32,7 @@ public class CommentServlet extends HttpServlet {
 
             CommentService.getInstance().addCommentToProductByEmail(email, productId, date, message);
 
-            json.put("success", "Your comment has been added successfully!");
+            json.put("success", "Your comment has been successfully added!");
         } catch (ParseException e) {
             json.put("failure", "Date error!");
             e.printStackTrace();
