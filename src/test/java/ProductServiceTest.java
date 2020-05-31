@@ -16,7 +16,7 @@ class ProductServiceTest {
     ProductService productService = ProductService.getInstance();
 
     Integer randomId = 1;
-    Integer randomNumber = 5;
+    Integer randomNumber = 6;
     String randomSRC = "photos/CaptureA71.JPG";
     String randomLink = "A71.jsp";
     Integer randomPrice = 430;
@@ -118,7 +118,7 @@ class ProductServiceTest {
             productService.restoreStock(randomId, 1);
             Integer newNumber = productService.getNumberById(randomId);
 
-            if(newNumber != randomNumber)
+            if(!newNumber.equals(randomNumber))
                 result = false;
         } catch (ProductNotFoundException e) {
             e.printStackTrace();
@@ -144,7 +144,7 @@ class ProductServiceTest {
 
             Integer newNumber = productService.getNumberById(randomId);
 
-            if(newNumber != randomNumber)
+            if(!newNumber.equals(randomNumber))
                 result = false;
 
         } catch (ProductNotFoundException | OutOfStockException e) {

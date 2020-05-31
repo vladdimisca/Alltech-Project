@@ -17,7 +17,7 @@ window.onload = function() {
     let button = document.getElementById('samsungTV');
     if(button) {
         checkStock(9);
-        getComments(9);
+        getComments(9, email);
 
         commentForm.onsubmit = function(event) {
             event.preventDefault();
@@ -31,7 +31,7 @@ window.onload = function() {
     let button1 = document.getElementById('lgTV');
     if(button1) {
         checkStock(8);
-        getComments(8);
+        getComments(8, email);
 
         commentForm.onsubmit = function(event) {
             event.preventDefault();
@@ -45,7 +45,7 @@ window.onload = function() {
     let button2 = document.getElementById('curvedTV');
     if(button2) {
         checkStock(7);
-        getComments(7);
+        getComments(7, email);
 
         commentForm.onsubmit = function(event) {
             event.preventDefault();
@@ -59,7 +59,7 @@ window.onload = function() {
     let button3 = document.getElementById('lenovoLaptop');
     if(button3) {
         checkStock(6);
-        getComments(6);
+        getComments(6, email);
 
         commentForm.onsubmit = function(event) {
             event.preventDefault();
@@ -73,7 +73,7 @@ window.onload = function() {
     let button4 = document.getElementById('dellLaptop');
     if(button4) {
         checkStock(5);
-        getComments(5);
+        getComments(5, email);
 
         commentForm.onsubmit = function(event) {
             event.preventDefault();
@@ -87,7 +87,7 @@ window.onload = function() {
     let button5 = document.getElementById('asusLaptop');
     if(button5) {
         checkStock(4);
-        getComments(4);
+        getComments(4, email);
 
         commentForm.onsubmit = function(event) {
             event.preventDefault();
@@ -101,7 +101,7 @@ window.onload = function() {
     let button6 = document.getElementById('huaweiPhone');
     if(button6) {
         checkStock(3);
-        getComments(3);
+        getComments(3, email);
 
         commentForm.onsubmit = function(event) {
             event.preventDefault();
@@ -115,7 +115,7 @@ window.onload = function() {
     let button7 = document.getElementById('applePhone');
     if(button7) {
         checkStock(2);
-        getComments(2);
+        getComments(2, email);
 
         commentForm.onsubmit = function(event) {
             event.preventDefault();
@@ -129,7 +129,7 @@ window.onload = function() {
     let button8 = document.getElementById('a71Phone');
     if(button8) {
         checkStock(1);
-        getComments(1);
+        getComments(1, email);
 
         commentForm.onsubmit = function(event) {
             event.preventDefault();
@@ -155,14 +155,14 @@ function autoGrow(oField) {
 
 function addToCart(button, email, productId) {
     let p = document.getElementById('message');
-    let d;
 
-    if(p === null) {
-        p = document.createElement('p');
-        p.setAttribute('id', 'message');
-
-        d = document.createElement('div');
+    if(p !== null) {
+        p.parentNode.removeChild(p);
     }
+
+    p = document.createElement('p');
+    p.setAttribute('id', 'message');
+    let d = document.createElement('div');
 
     p.style.display = 'block';
 
@@ -224,13 +224,16 @@ function checkStock(productId) {
 }
 
 function addComment(email, productId) {
-    let p = document.getElementById("message");
+    let p = document.getElementById("message2");
 
-    if(p === null) {
-        p = document.createElement('p');
-
-        p.setAttribute("id", "message");
+    if(p !== null) {
+        p.parentNode.removeChild(p);
     }
+
+    p = document.createElement('p');
+
+    p.setAttribute("id", "message2");
+    let  d = document.createElement('div');
 
     let today = new Date();
 
@@ -268,29 +271,42 @@ function addComment(email, productId) {
                         paragraph.style.display = 'none';
                     }
 
+                    getComments(productId, email)
+
                     p.innerHTML = response.success;
-
-                    let comment = document.createElement('p');
-                    comment.innerHTML = email + " " + dateTime + " " + message.value;
-
-                    document.getElementById("commentSection").appendChild(comment);
-
-                    message.value = "";
                 }
             }
         }
+        xHttpAdd.open("POST", "comments?email=" + email + "&productId=" + productId + "&date=" + dateTime +"&message=" + message.value, true);
+        xHttpAdd.send();
     }
 
-    xHttpAdd.open("POST", "comments?email=" + email + "&productId=" + productId + "&date=" + dateTime +"&message=" + message.value, true);
-    xHttpAdd.send();
+    message.value = "";
 
     let submitButton = document.getElementById('styledInput');
 
-    submitButton.parentNode.insertBefore(p, submitButton);
+    d.appendChild(p);
+
+    submitButton.parentNode.insertBefore(d, submitButton);
+
+    setTimeout(function() {
+
+        d.setAttribute('id', 'messages2--delete2');
+
+        p.addEventListener('transitionend', function() {
+            p.parentNode.removeChild(p);
+        });
+    }, 2000);
 }
 
-function getComments(productId) {
+function getComments(productId, email) {
     const xHttpGet = new XMLHttpRequest();
+
+    let ul = document.getElementsByClassName('media-list');
+
+    while(ul[0].lastElementChild) {
+        ul[0].removeChild(ul[0].lastElementChild);
+    }
 
     let paragraph = document.getElementById("commentP");
 
@@ -303,15 +319,80 @@ function getComments(productId) {
                    paragraph.style.display = 'none';
                 }
 
-                let p = document.createElement('p');
+                let li = document.createElement('li');
+                li.setAttribute('class', 'media');
 
-                p.innerHTML = comment['email'] + " " + comment['date'] + " " + comment['message'];
+                ul[0].appendChild(li);
 
-                document.getElementById("commentSection").appendChild(p);
+                let div2 = document.createElement('div');
+                div2.setAttribute('class', 'media-body');
+
+                li.appendChild(div2);
+
+                let span = document.createElement('span');
+                span.setAttribute('class', 'text-muted pull-right');
+
+                div2.appendChild(span);
+
+                let small = document.createElement('small');
+                small.setAttribute('class', 'text-muted');
+                small.innerText = comment['date'];
+
+                span.appendChild(small);
+
+                let strong = document.createElement('strong');
+                strong.setAttribute('class', 'text-success ');
+                strong.innerText = comment['email'];
+
+                div2.appendChild(strong);
+
+                let comm = document.createElement('p');
+                comm.innerText = comment['message'];
+
+                div2.appendChild(comm);
+
+                if(email === comment['email']) {
+                    let closeSpan = document.createElement('span');
+                    closeSpan.setAttribute('class', 'text-muted pull-right');
+
+                    let close = document.createElement('i');
+                    close.className = "fa fa-close";
+                    close.style = "font-size:20px;color:red;";
+                    close.setAttribute('id', comment['commentId']);
+
+                    close.onmouseover = function () { close.style = "font-size:20px;color:blue;cursor:pointer" };
+                    close.onmouseout = function () { close.style = "font-size:20px;color:red;"; }
+
+                    close.onclick = () => removeComment(comment['commentId']);
+
+                    closeSpan.appendChild(close);
+
+                    closeSpan.style.marginTop = "-10px";
+                    closeSpan.style.marginLeft = "10px";
+
+                    li.appendChild(closeSpan);
+                }
             });
         }
     }
 
     xHttpGet.open("GET", "comments?productId=" + productId, true);
     xHttpGet.send();
+}
+
+function removeComment(commentId) {
+    const xHttpDelete = new XMLHttpRequest();
+
+    xHttpDelete.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            const response = JSON.parse(this.response);
+
+            if(response.hasOwnProperty("success")) {
+                window.location.reload();
+            }
+        }
+    }
+
+    xHttpDelete.open("DELETE", "comments?commentId=" + commentId, true);
+    xHttpDelete.send();
 }

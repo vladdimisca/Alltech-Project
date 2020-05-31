@@ -98,8 +98,19 @@ function getCart(email) {
 
                 let priceP = getTotalPrice(email);
 
+                priceP.style.fontSize = "x-large";
+                priceP.style.fontWeight = "bold";
+
                 container.appendChild(hr);
                 container.appendChild(priceP);
+
+                let button = document.createElement('button');
+                button.setAttribute('class', 'registerbtn');
+                button.innerText = "Proceed";
+
+                button.onclick = function() { window.location.replace("order_details.jsp"); }
+
+                container.appendChild(button);
             }
         }
     };
@@ -146,7 +157,7 @@ function decreaseByOne(email, productId, paragraph) {
     window.location.replace("shopping_cart.jsp");
 }
 
-function deleteItemFromCart(email, productId,div, br) {
+function deleteItemFromCart(email, productId, div, br) {
     const xHttpDelete = new XMLHttpRequest();
 
     xHttpDelete.onreadystatechange = function () {
@@ -174,7 +185,6 @@ function getTotalPrice(email) {
     xHttpPrice.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             const response = JSON.parse(this.response);
-
 
             totalPrice.innerHTML = "Total price: $" + response['totalPrice'];
         }

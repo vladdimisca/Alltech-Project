@@ -7,12 +7,22 @@ public class Comment {
     Integer productId;
     Date date;
     String message;
+    Integer commentId;
 
-    public Comment(String email, Integer productId, Date date, String message) {
+    public Comment(Integer commentId, String email, Integer productId, Date date, String message) {
+        this.commentId = commentId;
         this.email = email;
         this.productId = productId;
         this.date = date;
         this.message = message;
+    }
+
+    public Integer getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(Integer commentId) {
+        this.commentId = commentId;
     }
 
     public String getEmail() {

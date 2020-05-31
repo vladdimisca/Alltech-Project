@@ -51,6 +51,7 @@ public class CommentRepository {
     public ArrayList<Comment> getCommentsById(Integer productId) {
         String sqlSelect = "" +
                 "SELECT " +
+                "COMMENT_ID, " +
                 "EMAIL, " +
                 "DATE, " +
                 "MESSAGE " +
@@ -71,12 +72,13 @@ public class CommentRepository {
             ResultSet result = statement.executeQuery();
 
             while(result.next()) {
+                Integer commentId = result.getInt("COMMENT_ID");
                 String email = result.getString("EMAIL");
                 Date date = result.getTimestamp("DATE");
                 String message = result.getString("MESSAGE");
 
 
-                Comment comment = new Comment(email, productId, date, message);
+                Comment comment = new Comment(commentId, email, productId, date, message);
                 comments.add(comment);
             }
         } catch (SQLException | ClassNotFoundException e)   {
@@ -94,5 +96,71 @@ public class CommentRepository {
         }
 
         return comments;
+    }
+
+    public void removeEmailFromComments(String email) {
+        String sqlUpdate = "" +
+                "UPDATE " +
+                "COMMENTS " +
+                "SET EMAIL = ? " +
+                "WHERE EMAIL = ?";
+
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlUpdate);
+
+            statement.setString(1, "[deleted]");
+            statement.setString(2, email);
+
+            statement.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e)   {
+            e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void removeCommentById(Integer commentId) {
+        String sqlDelete = "" +
+                "DELETE " +
+                "FROM " +
+                "COMMENTS " +
+                "WHERE COMMENT_ID = ?";
+
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlDelete);
+
+            statement.setInt(1, commentId);
+            statement.execute();
+        } catch (SQLException | ClassNotFoundException e)   {
+            e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

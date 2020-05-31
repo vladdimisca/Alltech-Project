@@ -285,13 +285,17 @@
     <h2 class="center" style="font-family: Trebuchet MS, Helvetica, sans-serif; ">Comments Section</h2>
     <div class="comments">
         <form action="comments" id="commentForm">
-            <textarea minlength="2" maxlength="300" id="styledTextArea"  onkeyup="autoGrow(this);" placeholder="Enter your comment here..."></textarea>
+            <textarea required minlength="2" maxlength="300" id="styledTextArea"  onkeyup="autoGrow(this);" placeholder="Enter your comment here..."></textarea>
             <br><br>
             <input id="styledInput" value="Send Comment" type="submit">
         </form>
     </div>
     <h3 style = "font-family: Trebuchet MS, Helvetica, sans-serif;">Comments: </h3>
     <p id="commentP">There are no comments to display!</p>
+    <div class="comment-wrapper">
+        <ul class="media-list">
+        </ul>
+    </div>
 </div>
 </body>
 </html>

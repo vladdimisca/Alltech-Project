@@ -23,4 +23,12 @@ public class CommentService {
     public ArrayList<Comment> getCommentsById(Integer productId) {
         return commentRepository.getCommentsById(productId);
     }
+
+    public void removeEmailFromComments(String email) {
+        commentRepository.removeEmailFromComments(email);
+    }
+
+    public void removeCommentById(Integer commentId) {
+        commentRepository.removeCommentById(commentId);
+    }
 }

@@ -18,9 +18,7 @@ body{
 
 .container {
     width: 75vw;
-    padding-top: 1%;
     margin: 2% auto;
-    padding-bottom: 1%;
     background-color: white;
     border-radius: 15px;
     padding: 3%;
@@ -65,9 +63,7 @@ body{
     color: white;
     font-size: 110%;
     background: #f07c2f;
-    padding: 5px;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding: 5px 30px;
 
 }
 #styledInput:hover {
@@ -168,6 +164,9 @@ body{
 #messages {
     overflow-x: hidden; }
 
+#messages2 {
+    overflow-x: hidden; }
+
 #message {
     font-weight: bold;
     text-align: center;
@@ -177,7 +176,48 @@ body{
     opacity: 1;
 }
 
+.comment-wrapper .panel-body {
+    overflow:auto;
+}
+
+.comment-wrapper .media-list .media img {
+    border:2px solid #e5e7e8;
+}
+
+.media-list {
+    padding: 0;
+}
+
+.media-body {
+    width: 100%;
+}
+
+.comment-wrapper .media-list .media {
+    border: 1px solid #ddd;
+    border-top: 0;
+    border-radius: 20px 20px 4px 4px;
+    background-color: #efefef;
+    padding: 20px;
+    margin: 0 30px 25px;
+}
+
+.media-body p {
+    padding-top: 5px;
+    margin: 0;
+}
+
+#message2 {
+    font-weight: bold;
+    font-size: large;
+    transition: opacity 1.25s ;
+    opacity: 1;
+}
+
 #messages--delete #message {
+    opacity: 0;
+}
+
+#messages2--delete2 #message2 {
     opacity: 0;
 }
 
@@ -226,7 +266,15 @@ body{
     .mydiv2 {
         padding: 10px;
     }
-
+    strong.text-success {
+        font-size: x-small;
+    }
+    small.text-muted {
+        font-size: x-small;
+    }
+    .media-body p{
+        font-size: small;
+    }
 }
 
 @media screen and (max-width: 450px){
@@ -239,5 +287,13 @@ body{
     .mydiv2 {
         padding: 10px;
     }
-
+    strong.text-success {
+        font-size: x-small;
+    }
+    small.text-muted {
+        font-size: x-small;
+    }
+    .media-body p{
+        font-size: small;
+    }
 }
