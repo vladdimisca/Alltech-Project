@@ -60,4 +60,8 @@ public class CartService {
 
         return sum;
     }
+
+    public void removeCartItemsByEmail(String email) {
+        cartRepository.removeCartItemsByEmail(email);
+    }
 }

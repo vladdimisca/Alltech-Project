@@ -48,7 +48,6 @@ window.onload = function () {
             changeEmail.setAttribute('class', 'button2');
             changeEmail.innerText = "Change";
 
-
             firstName.innerText = 'First Name: ' + response.firstName;
             lastName.innerText = 'Last Name: ' + response.lastName;
             em.innerText = 'Email: ' + response.email;

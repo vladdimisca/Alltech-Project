@@ -100,7 +100,6 @@ function getCart(email) {
 
                 priceP.style.fontSize = "x-large";
                 priceP.style.fontWeight = "bold";
-                priceP.style.float = "right";
 
                 container.appendChild(hr);
                 container.appendChild(priceP);
@@ -108,6 +107,8 @@ function getCart(email) {
                 let button = document.createElement('button');
                 button.setAttribute('class', 'registerbtn');
                 button.innerText = "Proceed";
+
+                button.onclick = function() { window.location.replace("order_details.jsp"); }
 
                 container.appendChild(button);
             }
@@ -156,7 +157,7 @@ function decreaseByOne(email, productId, paragraph) {
     window.location.replace("shopping_cart.jsp");
 }
 
-function deleteItemFromCart(email, productId,div, br) {
+function deleteItemFromCart(email, productId, div, br) {
     const xHttpDelete = new XMLHttpRequest();
 
     xHttpDelete.onreadystatechange = function () {

@@ -283,5 +283,37 @@ public class CartRepository {
             }
         }
     }
+
+    public void removeCartItemsByEmail(String email) {
+        String sqlDelete = "" +
+                "DELETE " +
+                "FROM " +
+                "CART " +
+                "WHERE EMAIL = ?";
+
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlDelete);
+
+            statement.setString(1, email);
+            statement.execute();
+        } catch (SQLException | ClassNotFoundException e)   {
+            e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
 

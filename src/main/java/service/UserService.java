@@ -32,6 +32,7 @@ public class UserService {
 
         try {
             ProductService.getInstance().restoreCartItemsByEmail(email);
+            CommentService.getInstance().removeEmailFromComments(email);
         } catch (ProductNotFoundException e) {
             e.printStackTrace();
         }

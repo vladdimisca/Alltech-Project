@@ -53,6 +53,7 @@ public class CommentServlet extends HttpServlet {
 
             String formattedDate = comment.getDate().toString();
 
+            json.put("commentId", comment.getCommentId());
             json.put("email", comment.getEmail());
             json.put("date", formattedDate.substring(0, formattedDate.indexOf('.')));
             json.put("message", comment.getMessage());
@@ -61,5 +62,18 @@ public class CommentServlet extends HttpServlet {
         }
 
         resp.getWriter().write(String.valueOf(jsonArray));
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        Integer commentId = Integer.parseInt(req.getParameter("commentId"));
+
+        CommentService.getInstance().removeCommentById(commentId);
+
+        JSONObject json = new JSONObject();
+
+        json.put("success", "Removed");
+
+        resp.getWriter().write(String.valueOf(json));
     }
 }
