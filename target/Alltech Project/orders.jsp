@@ -49,60 +49,6 @@
     <hr>
     <p id = "ordersMessage">You are not logged in.</p>
     <div class="archive">
-        <div class="grow">
-            <article class="article">
-                <p class="par" style="font-weight: bold">Order number: 5 </p>
-                <hr class="new1">
-                <p class="center">Date: 01/06/2020</p>
-                <hr class="new1">
-                <p class="center">Phone number: 0725342724</p>
-                <hr class="new1">
-                <p class="price"> $650</p>
-                <hr class="new1">
-                <p class="center">Delivery method: Cash on delivery</p>
-                <a href="#">
-                    <button class="cart">
-                        View order
-                    </button>
-                </a>
-            </article>
-        </div>
-        <div class="grow">
-            <article class="article">
-                <p class="par" style="font-weight: bold">Order number: 5 </p>
-                <hr class="new1">
-                <p class="center">Date: 01/06/2020</p>
-                <hr class="new1">
-                <p class="center">Phone number: 0725342724</p>
-                <hr class="new1">
-                <p class="price"> $650</p>
-                <hr class="new1">
-                <p class="center">Delivery method: Cash on delivery</p>
-                <a href="#">
-                    <button class="cart">
-                        View order
-                    </button>
-                </a>
-            </article>
-        </div>
-        <div class="grow">
-        <article class="article">
-            <p class="par" style="font-weight: bold">Order number: 5 </p>
-            <hr class="new1">
-            <p class="center">Date: 01/06/2020</p>
-            <hr class="new1">
-            <p class="center">Phone number: 0725342724</p>
-            <hr class="new1">
-            <p class="price"> $650</p>
-            <hr class="new1">
-            <p class="center">Delivery method: Cash on delivery</p>
-            <a href="#">
-                <button class="cart">
-                    View order
-                </button>
-            </a>
-        </article>
-    </div>
     </div>
 </div>
 </body>

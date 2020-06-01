@@ -4,6 +4,7 @@ import model.Order;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class OrderRepository {
     private static final OrderRepository orderRepositoryInstance = new OrderRepository();
@@ -34,7 +35,7 @@ public class OrderRepository {
             statement.setString(4, order.getPhoneNumber());
             statement.setString(5, order.getAddress());
             statement.setInt(6, order.getDeliveryMethod());
-            statement.setDate(7, new java.sql.Date(order.getDate().getTime()));
+            statement.setTimestamp(7, new java.sql.Timestamp(order.getDate().getTime()));
 
             statement.executeUpdate();
         } catch (SQLException | ClassNotFoundException e)   {
@@ -60,7 +61,7 @@ public class OrderRepository {
                 "PHONE_NUMBER, " +
                 "DELIVERY_METHOD, " +
                 "DATE " +
-                "FROM CART " +
+                "FROM ORDERS " +
                 "WHERE EMAIL = ?";
 
         ArrayList<Order> orders = new ArrayList<>();
@@ -81,7 +82,7 @@ public class OrderRepository {
                 Integer price = result.getInt("PRICE");
                 String phoneNumber = result.getString("PHONE_NUMBER");
                 Integer deliveryMethod = result.getInt("DELIVERY_METHOD");
-                Date date = result.getDate("DATE");
+                Date date = result.getTimestamp("DATE");
 
                 Order order = new Order(orderId, price, phoneNumber, deliveryMethod, date);
                 orders.add(order);

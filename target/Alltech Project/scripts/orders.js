@@ -5,6 +5,9 @@ window.onload = function () {
         if(logged === 1) {
             let targetLink = document.querySelectorAll('nav a')[5];
 
+            let paragraph = document.getElementById('ordersMessage');
+            paragraph.innerText = "You have no orders.";
+
             if (targetLink) {
                 targetLink.setAttribute("href", "user_profile.jsp");
             }
@@ -18,12 +21,12 @@ window.onload = function () {
 function getOrders(email) {
     const xHttpOrder = new XMLHttpRequest();
 
+    let container = document.getElementsByClassName('container')[0];
+    let paragraph = document.getElementById('ordersMessage');
+
     xHttpOrder.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             const response = JSON.parse(this.response);
-
-            let container = document.getElementsByClassName('container')[0];
-            let paragraph = document.getElementById('OrdersMessage');
 
             response.forEach(function (item) {
                 if (paragraph)
@@ -48,21 +51,22 @@ function getOrders(email) {
                 </a>
                 </article>
                 </div> */
-                let archive = document.createElement('div');
-                archive.setAttribute ('class', 'archive');
+
+                let archive = document.getElementsByClassName('archive')[0];
 
                 let grow = document.createElement('div');
                 grow.setAttribute('class', 'grow');
 
-                let article = document.createElement('div');
+                let article = document.createElement('article');
                 article.setAttribute('class', 'article');
 
                 archive.appendChild(grow);
                 grow.appendChild(article)
 
                 let para1 = document.createElement('p');
-                para1.innerHTML = "Order number " + item.orderId;
-                para1.setAttribute('class', "para");
+                para1.innerHTML = "Order number: " + item.orderId;
+                para1.setAttribute('class', 'par');
+                para1.style.fontWeight = "bold";
 
                 article.appendChild(para1);
 
@@ -88,16 +92,35 @@ function getOrders(email) {
 
                 article.appendChild(para3);
 
+                let hr4 = document.createElement('hr');
+                hr4.setAttribute('class', 'new1');
+
+                article.appendChild(hr4);
+
+                let paraprice = document.createElement('p');
+                paraprice.innerHTML = "$" + item.price;
+                paraprice.setAttribute('class', "price");
+
+                article.appendChild(paraprice);
+
                 let hr3 = document.createElement('hr');
                 hr3.setAttribute('class', 'new1');
 
                 article.appendChild(hr3);
 
                 let para4 = document.createElement('p');
-                para4.innerHTML = "Delivery method: " + item.deliveryMethod;
+                if(item.deliveryMethod == 1)
+                    para4.innerHTML = "Cash on delivery";
+                else
+                    para4.innerHTML = "Pick from store";
+
                 para4.setAttribute('class', "center");
 
                 article.appendChild(para4);
+
+                let br = document.createElement('br');
+
+                article.appendChild(br);
 
                 let a = document.createElement('a');
                 a.setAttribute('href', '#');
@@ -105,8 +128,10 @@ function getOrders(email) {
                 article.appendChild(a);
 
                 let button = document.createElement('button');
-                button.innerHTML = "View command";
+                button.innerHTML = "View order";
                 button.setAttribute('class', 'cart');
+
+                a.appendChild(button);
 
                 container.appendChild(archive);
 
@@ -117,4 +142,4 @@ function getOrders(email) {
 
     xHttpOrder.open("GET", "order?email=" + email, true);
     xHttpOrder.send();
-};
+}

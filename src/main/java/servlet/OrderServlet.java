@@ -1,5 +1,6 @@
 package servlet;
 
+import com.google.protobuf.StringValue;
 import model.Order;
 import model.Product;
 import org.json.simple.JSONArray;
@@ -71,11 +72,13 @@ public class OrderServlet extends HttpServlet {
         for (Order order : orders) {
             JSONObject json = new JSONObject();
 
+            String formattedDate = order.getDate().toString();
+
             json.put("orderId", order.getOrderId());
             json.put("price", order.getPrice());
             json.put("phoneNumber", order.getPhoneNumber());
             json.put("deliveryMethod", order.getDeliveryMethod());
-            json.put("date", order.getDate());
+            json.put("date", formattedDate.substring(0, formattedDate.indexOf('.')));
 
             jsonArray.add(json);
         }

@@ -70,9 +70,6 @@ function commitOrder(email, totalPrice) {
 
     let dateTime = today.getFullYear() + "/" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds;
 
-    console.log(dateTime)
-    console.log(typeof dateTime);
-
     const xHttpOrder = new XMLHttpRequest();
 
     xHttpOrder.onreadystatechange = function () {

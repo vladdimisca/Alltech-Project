@@ -48,6 +48,8 @@
     <h2 class = "center">My orders</h2>
     <hr>
     <p id = "ordersMessage">You are not logged in.</p>
+    <div class="archive">
+    </div>
 </div>
 </body>
 </html>
