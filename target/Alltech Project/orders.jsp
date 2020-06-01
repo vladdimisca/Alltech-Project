@@ -14,7 +14,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}orders.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="#"></script>
+    <script src="scripts/orders.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
@@ -47,6 +47,7 @@
 <div class="container">
     <h2 class = "center">My orders</h2>
     <hr>
+    <p id = "ordersMessage">You are not logged in.</p>
     <div class="archive">
         <div class="grow">
             <article class="article">

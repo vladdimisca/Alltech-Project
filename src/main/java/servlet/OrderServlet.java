@@ -51,8 +51,35 @@ public class OrderServlet extends HttpServlet {
 
             OrderService.getInstance().addOrder(order);
 
+            JSONObject json = new JSONObject();
+            json.put("success", "Added");
+
+            resp.getWriter().write(String.valueOf(json));
+
         } catch (ParseException e) {
         e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String email = req.getParameter("email");
+
+        ArrayList<Order> orders = OrderService.getInstance().getAllOrdersByEmail(email);
+        JSONArray jsonArray = new JSONArray();
+
+        for (Order order : orders) {
+            JSONObject json = new JSONObject();
+
+            json.put("orderId", order.getOrderId());
+            json.put("price", order.getPrice());
+            json.put("phoneNumber", order.getPhoneNumber());
+            json.put("deliveryMethod", order.getDeliveryMethod());
+            json.put("date", order.getDate());
+
+            jsonArray.add(json);
+        }
+
+        resp.getWriter().write(String.valueOf(jsonArray));
     }
 }
