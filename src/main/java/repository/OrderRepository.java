@@ -2,10 +2,8 @@ package repository;
 
 import model.Order;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class OrderRepository {
     private static final OrderRepository orderRepositoryInstance = new OrderRepository();
@@ -19,8 +17,8 @@ public class OrderRepository {
 
     public void addOrder(Order order) {
         String sqlInsert = "INSERT INTO ORDERS " +
-                           "(EMAIL, PRODUCTS, PRICE, PHONE_NUMBER, ADDRESS, DELIVERY_METHOD) " +
-                           "VALUES (?, ?, ?, ?, ?, ?)";
+                           "(EMAIL, PRODUCTS, PRICE, PHONE_NUMBER, ADDRESS, DELIVERY_METHOD, DATE) " +
+                           "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         Connection dbConnection = null;
         PreparedStatement statement = null;
@@ -36,6 +34,7 @@ public class OrderRepository {
             statement.setString(4, order.getPhoneNumber());
             statement.setString(5, order.getAddress());
             statement.setInt(6, order.getDeliveryMethod());
+            statement.setDate(7, new java.sql.Date(order.getDate().getTime()));
 
             statement.executeUpdate();
         } catch (SQLException | ClassNotFoundException e)   {
@@ -52,4 +51,56 @@ public class OrderRepository {
             }
         }
     }
+
+    public ArrayList<Order> getAllOrdersByEmail(String email) {
+        String sqlSelect = "" +
+                "SELECT " +
+                "ORDER_ID, " +
+                "PRICE, " +
+                "PHONE_NUMBER, " +
+                "DELIVERY_METHOD, " +
+                "DATE " +
+                "FROM CART " +
+                "WHERE EMAIL = ?";
+
+        ArrayList<Order> orders = new ArrayList<>();
+
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlSelect);
+
+            statement.setString(1, email);
+            ResultSet result = statement.executeQuery();
+
+            while(result.next()) {
+                Integer orderId = result.getInt("ORDER_ID");
+                Integer price = result.getInt("PRICE");
+                String phoneNumber = result.getString("PHONE_NUMBER");
+                Integer deliveryMethod = result.getInt("DELIVERY_METHOD");
+                Date date = result.getDate("DATE");
+
+                Order order = new Order(orderId, price, phoneNumber, deliveryMethod, date);
+                orders.add(order);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return orders;
+    }
+
 }

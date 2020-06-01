@@ -2,6 +2,8 @@ package model;
 
 import org.json.simple.JSONArray;
 
+import java.util.Date;
+
 public class Order {
     private Integer orderId;
     private String email;
@@ -10,9 +12,10 @@ public class Order {
     private String phoneNumber;
     private String address;
     private Integer deliveryMethod;
+    private Date date;
 
     public Order(Integer orderId, String email, JSONArray products, Integer price, String phoneNumber, String address,
-                 Integer deliveryMethod) {
+                 Integer deliveryMethod, Date date) {
         this.orderId = orderId;
         this.email = email;
         this.products = products;
@@ -20,16 +23,26 @@ public class Order {
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.deliveryMethod = deliveryMethod;
+        this.date = date;
     }
 
     public Order(String email, JSONArray products, Integer price, String phoneNumber, String address,
-                 Integer deliveryMethod) {
+                 Integer deliveryMethod, Date date) {
         this.email = email;
         this.products = products;
         this.price = price;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.deliveryMethod = deliveryMethod;
+        this.date = date;
+    }
+
+    public Order (Integer orderId, Integer price, String phoneNumber, Integer deliveryMethod, Date date){
+        this.orderId = orderId;
+        this.price = price;
+        this.phoneNumber = phoneNumber;
+        this.deliveryMethod = deliveryMethod;
+        this.date = date;
     }
 
     public Integer getOrderId() {
@@ -38,6 +51,14 @@ public class Order {
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getEmail() {

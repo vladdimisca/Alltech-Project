@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 @WebServlet("/order")
 public class OrderServlet extends HttpServlet {
@@ -23,24 +26,33 @@ public class OrderServlet extends HttpServlet {
         String phoneNumber = req.getParameter("phoneNumber");
         String address = req.getParameter("address");
         Integer deliveryMethod = Integer.parseInt(req.getParameter("deliveryMethod"));
+        String dateString = req.getParameter("date");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
-        ArrayList<Product> products = CartService.getInstance().getCartByEmail(email);
-        JSONArray jsonArray = new JSONArray();
+        try {
+            Date date = formatter.parse(dateString);
 
-        for(Product product : products) {
-            JSONObject json = new JSONObject();
+            ArrayList<Product> products = CartService.getInstance().getCartByEmail(email);
+            JSONArray jsonArray = new JSONArray();
 
-            json.put("productId", product.getProductId());
-            json.put("number", product.getNumber());
-            json.put("price", product.getPrice());
-            json.put("link", product.getLink());
-            json.put("source", product.getSource());
+            for(Product product : products) {
+                JSONObject json = new JSONObject();
 
-            jsonArray.add(json);
+                json.put("productId", product.getProductId());
+                json.put("number", product.getNumber());
+                json.put("price", product.getPrice());
+                json.put("link", product.getLink());
+                json.put("source", product.getSource());
+
+                jsonArray.add(json);
+            }
+
+            Order order = new Order(email, jsonArray, price, phoneNumber, address, deliveryMethod, date);
+
+            OrderService.getInstance().addOrder(order);
+
+        } catch (ParseException e) {
+        e.printStackTrace();
         }
-
-        Order order = new Order(email, jsonArray, price, phoneNumber, address, deliveryMethod);
-
-        OrderService.getInstance().addOrder(order);
     }
 }

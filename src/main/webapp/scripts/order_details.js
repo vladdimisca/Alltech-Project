@@ -51,13 +51,37 @@ function commitOrder(email, totalPrice) {
     let fullAddress = document.getElementById("address").value;
     let deliveryMethod = document.querySelector("input[name=delivery]:checked").value;
 
+    let today = new Date();
+
+    let month = (today.getMonth() + 1) < 10 ? "0" : "";
+    month += today.getMonth() + 1;
+
+    let day = today.getDate() < 10 ? "0" : "";
+    day += today.getDate();
+
+    let hour = today.getHours() < 10 ? "0" : "";
+    hour += today.getHours();
+
+    let minutes = today.getMinutes() < 10 ? "0" : "";
+    minutes += today.getMinutes();
+
+    let seconds = today.getSeconds() < 10 ? "0" : "";
+    seconds += today.getSeconds();
+
+    let dateTime = today.getFullYear() + "/" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds;
+
+    console.log(dateTime)
+    console.log(typeof dateTime);
+
     const xHttpOrder = new XMLHttpRequest();
 
     xHttpOrder.onreadystatechange = function () {
-
+        if (this.readyState === 4 && this.status === 200) {
+            window.location.replace('orders.jsp');
+        }
     }
 
     xHttpOrder.open("POST", "order?email=" + email + "&price=" + totalPrice + "&address=" + fullAddress +
-                "&phoneNumber=" + phoneNumber + "&deliveryMethod=" + deliveryMethod, true);
+                "&phoneNumber=" + phoneNumber + "&deliveryMethod=" + deliveryMethod + "&date=" + dateTime, true);
     xHttpOrder.send();
 }
