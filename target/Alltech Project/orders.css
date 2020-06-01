@@ -188,7 +188,7 @@ hr.new1 {
 @media screen and (max-width: 1300px){
     .container {
         margin-top: 8%;
-        width: 80vw;
+        width: 60vw;
     }
     #cf {
         width: 340px ;
@@ -212,7 +212,7 @@ hr.new1 {
 @media screen and (max-width: 900px){
     .container {
         margin-top: 8%;
-        width: 80vw;
+        width: 60vw;
     }
     #cf {
         width: 100%;
