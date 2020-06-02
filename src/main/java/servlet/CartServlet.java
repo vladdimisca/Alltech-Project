@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@SuppressWarnings("unchecked")
 @WebServlet("/shopping_cart")
 public class CartServlet extends HttpServlet {
 
@@ -57,7 +56,6 @@ public class CartServlet extends HttpServlet {
              json.put("number", productNumber);
         } catch(OutOfStockException e) {
             json.put("failure", "Out of stock");
-            e.printStackTrace();
         } catch (ProductNotFoundException e) {
             json.put("failure", "Product couldn't be added due to some technical issues");
             e.printStackTrace();

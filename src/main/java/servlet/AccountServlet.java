@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@SuppressWarnings("unchecked")
 @WebServlet("/user_account")
 public class AccountServlet extends HttpServlet {
     @Override
@@ -43,7 +42,6 @@ public class AccountServlet extends HttpServlet {
             json.put("success", "success");
         } catch (WrongPasswordException e) {
             json.put("failure", e.getMessage());
-            e.printStackTrace();
         }
 
         resp.getWriter().write(String.valueOf(json));
@@ -66,7 +64,6 @@ public class AccountServlet extends HttpServlet {
                     json.put("success", "Your password was updated!");
                 } catch (WrongPasswordException e) {
                     json.put("failure", e.getMessage());
-                    e.printStackTrace();
                 }
                 break;
 
@@ -98,7 +95,6 @@ public class AccountServlet extends HttpServlet {
                     json.put("success", "success");
                 } catch (ExistingUserException e) {
                     json.put("failure", e.getMessage());
-                    e.printStackTrace();
                 }
                 break;
             default:

@@ -31,7 +31,6 @@ public class RegisterServlet extends HttpServlet {
             json.put("success", message);
         } catch (ExistingUserException e) {
             json.put("failure", e.getMessage());
-            e.printStackTrace();
         }
 
         resp.getWriter().write(String.valueOf(json));
