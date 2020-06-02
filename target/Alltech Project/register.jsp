@@ -30,7 +30,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="register.jsp" class="nav-link">Account</a>
+                    <a href="register.jsp" class="nav-link active">Account</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">

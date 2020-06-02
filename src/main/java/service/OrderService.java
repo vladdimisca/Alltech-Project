@@ -24,4 +24,8 @@ public class OrderService {
     public ArrayList<Order> getAllOrdersByEmail(String email) {
         return orderRepository.getAllOrdersByEmail(email);
     }
+
+    public Order getOrderById(Integer orderId) {
+        return orderRepository.getOrderById(orderId);
+    }
 }

@@ -1,6 +1,8 @@
 package repository;
 
 import model.Order;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ public class OrderRepository {
             statement = dbConnection.prepareStatement(sqlInsert);
 
             statement.setString(1, order.getEmail());
-            statement.setString(2, String.valueOf(order.getProducts()));
+            statement.setString(2, order.getProducts());
             statement.setInt(3, order.getPrice());
             statement.setString(4, order.getPhoneNumber());
             statement.setString(5, order.getAddress());
@@ -104,4 +106,57 @@ public class OrderRepository {
         return orders;
     }
 
+    public Order getOrderById(Integer orderId) {
+        String sqlSelect = "" +
+                "SELECT " +
+                "EMAIL, " +
+                "PRODUCTS, " +
+                "PRICE, " +
+                "PHONE_NUMBER, " +
+                "DELIVERY_METHOD, " +
+                "DATE, " +
+                "ADDRESS " +
+                "FROM ORDERS " +
+                "WHERE ORDER_ID = ?";
+
+        Connection dbConnection = null;
+        PreparedStatement statement = null;
+
+        Order order = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            dbConnection = DriverManager.getConnection(url, username, password);
+            statement = dbConnection.prepareStatement(sqlSelect);
+
+            statement.setInt(1, orderId);
+            ResultSet result = statement.executeQuery();
+
+            if(result.next()) {
+                String email = result.getString("EMAIL");
+                Integer price = result.getInt("PRICE");
+                String phoneNumber = result.getString("PHONE_NUMBER");
+                Integer deliveryMethod = result.getInt("DELIVERY_METHOD");
+                String address = result.getString("ADDRESS");
+                Date date = result.getTimestamp("DATE");
+                String products = result.getString("PRODUCTS");
+
+                order = new Order(orderId, email, products, price, phoneNumber, address, deliveryMethod, date);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                assert dbConnection != null;
+                dbConnection.close();
+
+                assert statement != null;
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return order;
+    }
 }

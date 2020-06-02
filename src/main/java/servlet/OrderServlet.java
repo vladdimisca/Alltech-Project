@@ -1,6 +1,5 @@
 package servlet;
 
-import com.google.protobuf.StringValue;
 import model.Order;
 import model.Product;
 import org.json.simple.JSONArray;
@@ -48,7 +47,7 @@ public class OrderServlet extends HttpServlet {
                 jsonArray.add(json);
             }
 
-            Order order = new Order(email, jsonArray, price, phoneNumber, address, deliveryMethod, date);
+            Order order = new Order(email, String.valueOf(jsonArray), price, phoneNumber, address, deliveryMethod, date);
 
             OrderService.getInstance().addOrder(order);
 
@@ -64,25 +63,48 @@ public class OrderServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String email = req.getParameter("email");
+        int type = Integer.parseInt(req.getParameter("type"));
 
-        ArrayList<Order> orders = OrderService.getInstance().getAllOrdersByEmail(email);
-        JSONArray jsonArray = new JSONArray();
+        if(type == 1) {
+            String email = req.getParameter("email");
 
-        for (Order order : orders) {
+            ArrayList<Order> orders = OrderService.getInstance().getAllOrdersByEmail(email);
+            JSONArray jsonArray = new JSONArray();
+
+            for (Order order : orders) {
+                JSONObject json = new JSONObject();
+
+                String formattedDate = order.getDate().toString();
+
+                json.put("orderId", order.getOrderId());
+                json.put("price", order.getPrice());
+                json.put("phoneNumber", order.getPhoneNumber());
+                json.put("deliveryMethod", order.getDeliveryMethod());
+                json.put("date", formattedDate.substring(0, formattedDate.indexOf('.')));
+
+                jsonArray.add(json);
+            }
+
+            resp.getWriter().write(String.valueOf(jsonArray));
+        } else {
+            int orderId = Integer.parseInt(req.getParameter("orderId"));
+
+            Order order = OrderService.getInstance().getOrderById(orderId);
+
             JSONObject json = new JSONObject();
 
             String formattedDate = order.getDate().toString();
 
             json.put("orderId", order.getOrderId());
+            json.put("email", order.getEmail());
+            json.put("products", order.getProducts());
             json.put("price", order.getPrice());
             json.put("phoneNumber", order.getPhoneNumber());
             json.put("deliveryMethod", order.getDeliveryMethod());
+            json.put("address", order.getAddress());
             json.put("date", formattedDate.substring(0, formattedDate.indexOf('.')));
 
-            jsonArray.add(json);
+            resp.getWriter().write(String.valueOf(json));
         }
-
-        resp.getWriter().write(String.valueOf(jsonArray));
     }
 }

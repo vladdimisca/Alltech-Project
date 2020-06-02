@@ -89,7 +89,7 @@ function getOrders(email) {
                 article.appendChild(hr3);
 
                 let para4 = document.createElement('p');
-                if(item.deliveryMethod == 1)
+                if(item['deliveryMethod'] === 1)
                     para4.innerHTML = "Cash on delivery";
                 else
                     para4.innerHTML = "Pick from store";
@@ -102,16 +102,18 @@ function getOrders(email) {
 
                 article.appendChild(br);
 
-                let a = document.createElement('a');
-                a.setAttribute('href', '#');
-
-                article.appendChild(a);
-
                 let button = document.createElement('button');
                 button.innerHTML = "View order";
-                button.setAttribute('class', 'cart');
+                button.className += "cart";
+                button.setAttribute('id', item["orderId"]);
 
-                a.appendChild(button);
+                button.onclick = function() {
+                    sessionStorage.setItem("orderId", item["orderId"]);
+
+                    window.location.replace("view_order.jsp");
+                }
+
+                article.appendChild(button);
 
                 container.appendChild(archive);
 
@@ -119,7 +121,6 @@ function getOrders(email) {
         }
     }
 
-
-    xHttpOrder.open("GET", "order?email=" + email, true);
+    xHttpOrder.open("GET", "order?type=1&email=" + email, true);
     xHttpOrder.send();
 }

@@ -37,7 +37,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a href="user_profile.jsp" class="nav-link">Account</a>
+                <a href="user_profile.jsp" class="nav-link active">Account</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
