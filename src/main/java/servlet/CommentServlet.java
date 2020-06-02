@@ -15,7 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-@SuppressWarnings("unchecked")
 @WebServlet("/comments")
 public class CommentServlet extends HttpServlet {
 

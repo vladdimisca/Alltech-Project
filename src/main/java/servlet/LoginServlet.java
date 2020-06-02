@@ -28,7 +28,6 @@ public class LoginServlet extends HttpServlet {
             json.put("success", "success");
         } catch (EmailNotFoundException | WrongPasswordException e) {
             json.put("failure", e.getMessage());
-            e.printStackTrace();
         }
 
         resp.getWriter().write(String.valueOf(json));
