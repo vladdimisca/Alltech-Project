@@ -3,6 +3,8 @@ package service;
 import model.Order;
 import repository.OrderRepository;
 
+import java.util.ArrayList;
+
 public class OrderService {
     private static final OrderService orderServiceInstance = new OrderService();
     OrderRepository orderRepository = OrderRepository.getInstance();
@@ -17,5 +19,13 @@ public class OrderService {
         orderRepository.addOrder(order);
 
         CartService.getInstance().removeCartItemsByEmail(order.getEmail());
+    }
+
+    public ArrayList<Order> getAllOrdersByEmail(String email) {
+        return orderRepository.getAllOrdersByEmail(email);
+    }
+
+    public Order getOrderById(Integer orderId) {
+        return orderRepository.getOrderById(orderId);
     }
 }

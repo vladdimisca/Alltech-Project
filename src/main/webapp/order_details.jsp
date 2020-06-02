@@ -33,7 +33,10 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a href="shopping_cart.jsp" class="nav-link">Shopping Cart</a>
+                <a href="orders.jsp" class="nav-link">My Orders</a>
+            </li>
+            <li class="nav-item">
+                <a href="shopping_cart.jsp" class="nav-link active">Shopping Cart</a>
             </li>
         </ul>
     </div>

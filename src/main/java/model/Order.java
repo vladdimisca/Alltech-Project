@@ -7,14 +7,14 @@ import java.util.Date;
 public class Order {
     private Integer orderId;
     private String email;
-    private JSONArray products;
+    private String products;
     private Integer price;
     private String phoneNumber;
     private String address;
     private Integer deliveryMethod;
     private Date date;
 
-    public Order(Integer orderId, String email, JSONArray products, Integer price, String phoneNumber, String address,
+    public Order(Integer orderId, String email, String products, Integer price, String phoneNumber, String address,
                  Integer deliveryMethod, Date date) {
         this.orderId = orderId;
         this.email = email;
@@ -26,7 +26,7 @@ public class Order {
         this.date = date;
     }
 
-    public Order(String email, JSONArray products, Integer price, String phoneNumber, String address,
+    public Order(String email, String products, Integer price, String phoneNumber, String address,
                  Integer deliveryMethod, Date date) {
         this.email = email;
         this.products = products;
@@ -69,11 +69,11 @@ public class Order {
         this.email = email;
     }
 
-    public JSONArray getProducts() {
+    public String getProducts() {
         return products;
     }
 
-    public void setProducts(JSONArray products) {
+    public void setProducts(String products) {
         this.products = products;
     }
 

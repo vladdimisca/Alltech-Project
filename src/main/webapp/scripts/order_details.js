@@ -70,13 +70,12 @@ function commitOrder(email, totalPrice) {
 
     let dateTime = today.getFullYear() + "/" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds;
 
-    console.log(dateTime)
-    console.log(typeof dateTime);
-
     const xHttpOrder = new XMLHttpRequest();
 
     xHttpOrder.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
+        const response = JSON.parse(this.response);
+
+        if(response.hasOwnProperty("success")) {
             window.location.replace('orders.jsp');
         }
     }

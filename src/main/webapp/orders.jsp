@@ -14,7 +14,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}orders.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="#"></script>
+    <script src="scripts/orders.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
@@ -38,6 +38,9 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+                <a href="orders.jsp" class="nav-link active">My Orders</a>
+            </li>
+            <li class="nav-item">
                 <a href="shopping_cart.jsp" class="nav-link">Shopping Cart</a>
             </li>
         </ul>
@@ -47,61 +50,8 @@
 <div class="container">
     <h2 class = "center">My orders</h2>
     <hr>
+    <p id = "ordersMessage">You are not logged in.</p>
     <div class="archive">
-        <div class="grow">
-            <article class="article">
-                <p class="par" style="font-weight: bold">Order number: 5 </p>
-                <hr class="new1">
-                <p class="center">Date: 01/06/2020</p>
-                <hr class="new1">
-                <p class="center">Phone number: 0725342724</p>
-                <hr class="new1">
-                <p class="price"> $650</p>
-                <hr class="new1">
-                <p class="center">Delivery method: Cash on delivery</p>
-                <a href="#">
-                    <button class="cart">
-                        View order
-                    </button>
-                </a>
-            </article>
-        </div>
-        <div class="grow">
-            <article class="article">
-                <p class="par" style="font-weight: bold">Order number: 5 </p>
-                <hr class="new1">
-                <p class="center">Date: 01/06/2020</p>
-                <hr class="new1">
-                <p class="center">Phone number: 0725342724</p>
-                <hr class="new1">
-                <p class="price"> $650</p>
-                <hr class="new1">
-                <p class="center">Delivery method: Cash on delivery</p>
-                <a href="#">
-                    <button class="cart">
-                        View order
-                    </button>
-                </a>
-            </article>
-        </div>
-        <div class="grow">
-        <article class="article">
-            <p class="par" style="font-weight: bold">Order number: 5 </p>
-            <hr class="new1">
-            <p class="center">Date: 01/06/2020</p>
-            <hr class="new1">
-            <p class="center">Phone number: 0725342724</p>
-            <hr class="new1">
-            <p class="price"> $650</p>
-            <hr class="new1">
-            <p class="center">Delivery method: Cash on delivery</p>
-            <a href="#">
-                <button class="cart">
-                    View order
-                </button>
-            </a>
-        </article>
-    </div>
     </div>
 </div>
 </body>
