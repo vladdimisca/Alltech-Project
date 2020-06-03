@@ -53,7 +53,7 @@ function showOrder(orderId) {
 
             let delivery = document.createElement('p');
             let txt5 = "Delivery method: ";
-            if(response["deliveryMethod"] == 1)
+            if(response["deliveryMethod"] === 1)
                 delivery.innerHTML = txt5.bold() + "Cash on delivery";
             else
                 delivery.innerHTML = txt5.bold() + "Pick from our store";
