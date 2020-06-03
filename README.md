@@ -12,7 +12,7 @@ Retrospective Sprint 3: https://trello.com/b/2NMzw1jc/retrospective-sprint-3
 Sprint 4: https://trello.com/b/KC6eLf0t/sprint-4  
 Retrospective Sprint 4: https://trello.com/b/q5hsuoK7/retrospective-sprint-4  
   
-- design/arhitectura/UML - 2 pct: de facut!!!  
+- design/arhitectura/UML - 2 pct: da (a se vedea link-ul https://github.com/vladdimisca/MDS-Alltech-App/blob/master/UML%20-%20MDS.jpg)  
    
 - source control (branch creation, merge/rebase, minim 10 commits) - 2 pct: da (a se vedea acest repository: https://github.com/vladdimisca/MDS-Alltech-App)  
    
