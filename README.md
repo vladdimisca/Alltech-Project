@@ -26,4 +26,4 @@ Retrospective Sprint 4: https://trello.com/b/q5hsuoK7/retrospective-sprint-4
   
 - design patterns - 1 pct: da (am folosit Singleton - a se vedea acest link: https://github.com/vladdimisca/MDS-Alltech-App/tree/master/src/main/java/service)  
 
-
+- videoclip de prezentare: https://github.com/vladdimisca/MDS-Alltech-App/blob/master/Presentation.mp4
